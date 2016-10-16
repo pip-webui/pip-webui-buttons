@@ -1,0 +1,118 @@
+// @file Drilldown List CSS styles
+// @copyright Digital Living Software Corp. 2014-2015
+// @todo
+// - Shall we use a regular list here?
+// - We shall define other components (pic, counter, chevron) 
+
+.pip-drilldown-list {
+  .pip-drilldown-list-item {
+    height: 48px;
+    width: 100%;
+    margin: 0 !important;
+    padding-left: 24px;
+    padding-right: 16px;
+    border-radius: 0 !important;
+
+    md-icon{
+      .flex-fixed();
+      min-width: 24px;
+    }
+
+    .pip-content{
+      .flex();
+      .flex-direction-row();
+      .flex-vertical-center();
+      width: 100%;
+    }
+
+    &.pip-selected {
+      padding-left: 19px;
+      background-color: rgba(158, 158, 158, 0.2);
+      border-left: 5px solid rgba(33, 150, 243, 0.5) !important;
+    }
+  
+    @media (max-width: 768px) {
+      padding-left: 16px;
+      padding-right: 10px;
+      
+      &.pip-selected{
+        padding-left: 11px;
+      }
+    }
+  
+    .flex();
+    .flex-direction-row();
+    .flex-vertical-center();
+    .flex-horizontal-start();
+  
+    text-transform: none !important;//capitalize;
+    font: @font-subhead2;
+  
+    .pip-title {
+      text-align: justify;
+      text-align: start;
+      .flex();
+      .text-overflow();
+      margin: 0;
+      margin-right: 16px;
+
+      flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+
+      box-sizing: border-box;
+    }
+
+    .pip-subtitle{
+      font: @font-body1;
+      opacity: @opacity-secondary;
+      text-align: justify;
+      text-align: start;
+      margin: 0 24px 0 0;
+      overflow: hidden;
+      text-overflow: ellipsis;        
+    }
+
+    .pip-icon {
+      margin-right: 26px;
+    }
+
+    &.pip-drilldown-list-item-lg{
+      height: 64px;
+      .pip-title{
+        margin-top: 1px !important;
+        margin-bottom: 4px !important;
+      }
+      .pip-subcontent{
+        .text-overflow();
+      }
+    }
+  }
+}
+
+.generate-drilldown (@name, @color) {
+  .@{name} {
+
+      .pip-drilldown-list-item {
+
+        &.pip-selected {
+          border-left: 5px solid @color !important;
+        }
+    }
+  }
+}
+
+
+.generate-drilldown(blue,                @color-blue-hue);
+.generate-drilldown(pink,                @color-pink-hue);
+.generate-drilldown(orange,              @color-orange-hue);
+.generate-drilldown(amber,               @color-amber-hue);
+.generate-drilldown(green,               @color-green-hue);
+.generate-drilldown(navy,                @color-navy-hue);
+.generate-drilldown(grey,                @color-grey-hue);
+.generate-drilldown(dark,                @color-dark-hue);
+.generate-drilldown(black,               @color-black-hue);
+
+.generate-drilldown(bootbarn-warm,       @color-bootbarn-warm-hue);
+.generate-drilldown(bootbarn-cool,       rgba(69,90, 100,.54));
+.generate-drilldown(bootbarn-monochrome, rgba(38,50,56,.54));
