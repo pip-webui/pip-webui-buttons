@@ -31,7 +31,7 @@ See online samples [here...](http://webui.pipdevs.com/pip-webui-buttons/index.ht
     <img src="https://github.com/pip-webui/pip-webui-buttons/raw/master/doc/images/img-toggle-btns.png"/>
 </a>
 
-        See online samples [here...](http://webui.pipdevs.com/pip-webui-buttons/index.html#/toggle_buttons)
+See online samples [here...](http://webui.pipdevs.com/pip-webui-buttons/index.html#/toggle_buttons)
 
 ## Learn more about the module
 
