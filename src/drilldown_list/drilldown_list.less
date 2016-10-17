@@ -89,30 +89,3 @@
     }
   }
 }
-
-.generate-drilldown (@name, @color) {
-  .@{name} {
-
-      .pip-drilldown-list-item {
-
-        &.pip-selected {
-          border-left: 5px solid @color !important;
-        }
-    }
-  }
-}
-
-
-.generate-drilldown(blue,                @color-blue-hue);
-.generate-drilldown(pink,                @color-pink-hue);
-.generate-drilldown(orange,              @color-orange-hue);
-.generate-drilldown(amber,               @color-amber-hue);
-.generate-drilldown(green,               @color-green-hue);
-.generate-drilldown(navy,                @color-navy-hue);
-.generate-drilldown(grey,                @color-grey-hue);
-.generate-drilldown(dark,                @color-dark-hue);
-.generate-drilldown(black,               @color-black-hue);
-
-.generate-drilldown(bootbarn-warm,       @color-bootbarn-warm-hue);
-.generate-drilldown(bootbarn-cool,       rgba(69,90, 100,.54));
-.generate-drilldown(bootbarn-monochrome, rgba(38,50,56,.54));

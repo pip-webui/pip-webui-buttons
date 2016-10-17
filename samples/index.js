@@ -4,8 +4,8 @@
     var thisModule = angular.module('appButtons',
         [
             'ngMaterial',
-            'pipServices', 'pipButtons', 'appCoreServices.Toasts', 
-            'pipLayout', 'pipNav', 'pipDateTimes',
+            'pipServices', 'pipButtons', //'appCoreServices.Toasts', 
+            'pipLayout', 'pipNav', // 'pipDateTimes',
             'pipTheme.Default', 'pipTheme.Bootbarn', 'pipTheme',
 
             'appButtons.Refresh', 'appButtons.ToggleButtons'
@@ -74,7 +74,7 @@
         function ($scope, $rootScope, $state, $mdSidenav, $timeout, pipTranslate, $mdTheming, pipTheme, 
                   $mdMedia) {
 
-            pipTheme.setCurrentTheme('bootbarn-warm');
+           // pipTheme.setCurrentTheme('bootbarn-warm');
             
             $scope.pages = [
                 { title: 'Refresh', state: 'refresh', url: '/refresh',
