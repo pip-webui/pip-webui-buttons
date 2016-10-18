@@ -32,7 +32,8 @@
 
             $timeout(function() {
                 $('pre code').each(function(i, block) {
-                    Prism.highlightElement(block);
+                    if (Prism)
+                        Prism.highlightElement(block);
                 });
             });
             
