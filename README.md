@@ -6,15 +6,15 @@ Pip.WebUI.Buttons provides a selection of button controls: toggle buttons, actio
 
 **Action list** is a set of big action buttons that are placed at the bottom of a page.
 
-<a href="https://github.com/pip-webui/pip-webui-csscomponents/raw/master/doc/images/img-action-list.png" style="border: 3px ridge #c8d2df; margin: auto; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-csscomponents/raw/master/doc/images/img-action-list.png"/>
+<a href="https://github.com/pip-webui/pip-webui-buttons/raw/master/doc/images/img-action-list.png" style="border: 3px ridge #c8d2df; margin: auto; display: inline-block">
+    <img src="https://github.com/pip-webui/pip-webui-buttons/raw/master/doc/images/img-action-list.png"/>
 </a>
 
 
 **Drilldown list** is a list with clickable items, that lead to detail information.
 
-<a href="https://github.com/pip-webui/pip-webui-csscomponents/raw/master/doc/images/img-drilldown-list.png" style="border: 3px ridge #c8d2df; margin: auto; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-csscomponents/raw/master/doc/images/img-drilldown-list.png"/>
+<a href="https://github.com/pip-webui/pip-webui-buttons/raw/master/doc/images/img-drilldown-list.png" style="border: 3px ridge #c8d2df; margin: auto; display: inline-block">
+    <img src="https://github.com/pip-webui/pip-webui-buttons/raw/master/doc/images/img-drilldown-list.png"/>
 </a>
 
 **Refresh button** shows at the top of the screen when new data is available. By clicking on it, user triggers the update. It is used as a visual confirmation of he data arrival and helps to manager user expectations.
