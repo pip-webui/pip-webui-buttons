@@ -1,4 +1,4 @@
-<div class="pip-toggle-buttons flex layout-row {{class}}" pip-selected="bufButtonIndex" pip-enter-space-press="enterSpacePress($event)"
+<div class="pip-toggle-buttons layout-row {{class}}" pip-selected="bufButtonIndex" pip-enter-space-press="enterSpacePress($event)"
      ng-if="$mdMedia('gt-xs')">
     <md-button tabindex="-1" ng-repeat="button in buttons"
                ng-class="{'md-accent md-raised selected color-accent-bg' : currentButtonIndex == $index}"

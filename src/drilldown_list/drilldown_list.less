@@ -20,8 +20,8 @@
 
     .pip-content{
       .flex();
-      .flex-direction-row();
-      .flex-vertical-center();
+      .flex-direction(row);
+      .flex-vertical-content(center);
       width: 100%;
     }
 
@@ -41,9 +41,9 @@
     }
   
     .flex();
-    .flex-direction-row();
-    .flex-vertical-center();
-    .flex-horizontal-start();
+    .flex-direction(row);
+    .flex-vertical-content(center);
+    .flex-justify-content(start, flex-start);
   
     text-transform: none !important;//capitalize;
     font: @font-subhead2;
