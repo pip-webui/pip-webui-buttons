@@ -3,32 +3,25 @@
 
     var thisModule = angular.module('appButtons.ToggleButtons', []);
 
-    thisModule.config(function (pipTranslateProvider) {
-        pipTranslateProvider.translations('en', {
-            INITIALIZED: 'Initialized',
-            NOT: 'Not',
-            COLORED: 'Colored'
-        });
-        pipTranslateProvider.translations('ru', {
-            INITIALIZED: 'Инициализированный',
-            NOT: 'Не',
-            COLORED: 'Цветной'
-        });
-    });
-
     thisModule.controller('ToggleButtonsController',
-        function ($scope, pipAppBar, $timeout) {
+        function ($scope, $timeout) {
+
+        // pipTranslateProvider.translations('en', {
+        //     INITIALIZED: 'Initialized',
+        //     NOT: 'Not',
+        //     COLORED: 'Colored'
+        // });
+        // pipTranslateProvider.translations('ru', {
+        //     INITIALIZED: 'Инициализированный',
+        //     NOT: 'Не',
+        //     COLORED: 'Цветной'
+        // });
 
             $timeout(function() {
                 $('pre code').each(function(i, block) {
                     Prism.highlightElement(block);
                 });
             });
-            
-            pipAppBar.hideShadow();
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showLanguage();
-            pipAppBar.showTitleText('CONTROLS');
 
             $scope.buttonsCollection = [
                 {id: 'type LOW', name: 'LOW', disabled: false, filled: true},

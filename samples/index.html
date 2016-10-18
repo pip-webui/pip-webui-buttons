@@ -9,13 +9,13 @@
     <title>Buttons</title>
 
     <link rel="stylesheet" href="../lib/pip-webui-lib.css"/>
-    <link rel="stylesheet" href="../lib/pip-webui-css.css"/>
-    <link rel="stylesheet" href="../lib/pip-webui-csscomponents.css"/>    
+    <!--<link rel="stylesheet" href="../lib/pip-webui-css.css"/>
+    <link rel="stylesheet" href="../lib/pip-webui-csscomponents.css"/>    -->
 
     <link rel="stylesheet" href="../lib/pip-webui-themes.css"/>
-    <link rel="stylesheet" href="../lib/pip-webui-layouts.css"/>
-    <link rel="stylesheet" href="../lib/pip-webui-dates.css"/>
-    <link rel="stylesheet" href="../lib/pip-webui-nav.css"/>
+    <!--<link rel="stylesheet" href="../lib/pip-webui-layouts.css"/>-->
+    <!--<link rel="stylesheet" href="../lib/pip-webui-dates.css"/>-->
+    <!--<link rel="stylesheet" href="../lib/pip-webui-nav.css"/>-->
 
     <link rel="stylesheet" href="../../node_modules/prismjs/themes/prism.css">
 
@@ -30,59 +30,83 @@
     <script src="../lib/pip-webui-services.js"></script>
     <!--<script src="../lib/pip-webui-rest.js"></script>-->
     <!--<script src="../lib/pip-webui-data.js"></script>    -->
-    <script src="../lib/pip-webui-layouts.js"></script>
-    <script src="../lib/pip-webui-nav.js"></script>
+    <!--<script src="../lib/pip-webui-layouts.js"></script>-->
+    <!--<script src="../lib/pip-webui-nav.js"></script>-->
     <script src="../lib/pip-webui-themes.js"></script>
-    <script src="../lib/pip-webui-dates.js"></script>
+    <!--<script src="../lib/pip-webui-dates.js"></script>-->
     <script src="../dist/pip-webui-buttons.js"></script>
 
     <script src="../../node_modules/prismjs/prism.js"></script>
 
     <script src="refresh_sample/refresh.js"></script>
     <script src="toggle_buttons_sample/toggle_buttons.js"></script>
+    <script src="action_list_sample/action_list.js"></script>
+    <script src="drilldown_list_sample/drilldown_list.js"></script>
+    <script src="fabs_sample/fab_tooltip_visibility.js"></script>
     <script src="index.js"></script>
 
 </head>
 
 <body ng-app="appButtons" ng-if="!$reset" ng-controller="pipSampleController"
-     class="pip-main layout-column">
-<pip-main class="pip-main">
-    <pip-appbar>
-    </pip-appbar>
+     class="pip-main layout-column {{$theme}}" md-theme="{{$theme}}">
+<md-toolbar >
+    <div class="layout-row layout-align-start-center">
+        <md-button class="md-icon-button" aria-label="MENU" ng-if="!$mdMedia('gt-sm')" ng-click="onToggleMenu()">
+            <md-icon md-svg-icon="icons:menu" ></md-icon>
+            </md-button>
+        <div class="md-toolbar-tools">
+            <div class="flex-var text-overflow">Buttons</div>
+        </div>
 
-    <pip-sidenav>
-    </pip-sidenav>
-
-    <pip-main-body ng-cloak class="pip-main-body layout-column" ng-if="!isEntryPage()">
-        <md-toolbar class="pip-appbar-ext">
-        </md-toolbar>
-        <pip-document class="pip-document">
-            <div class="pip-menu-container">
-
-                <md-list class="pip-menu pip-simple-list hide-xs"
-                         pip-selected="selected.pageIndex"
-                         pip-selected-watch="selected.navId"
-                         pip-select="onNavigationSelect($event.id)">
-                    <md-list-item class="pip-simple-list-item pip-selectable"
-                                  ng-repeat="page in pages track by page.state"
-                                  ng-class="{'selected': page.state == $state.name}"
-                                  md-ink-ripple
-                                  pip-id="{{:: page.state }}">
-                        <p>{{:: page.title }}</p>
-                    </md-list-item>
-                </md-list>
-
-                <div class="pip-content-container">
-                    <pip-dropdown class="hide-gt-xs"
-                                  pip-actions="pages"
-                                  pip-dropdown-select="onDropdownSelect"
-                                  pip-active-index="selected.pageIndex"></pip-dropdown>
-                    <div ui-view class="p24 scrolled"></div>
-                </div>
+        <md-menu md-position-mode="target-right target" ng-if="isTheme">
+            <div class="layout-row layout-align-start-center" style="  cursor: pointer;outline: none; margin-right: 16px;"
+                      ng-click="$mdOpenMenu()"
+                      aria-label="theme selection">
+                    <span style="white-space:nowrap;">
+                        {{ $theme | translate}}
+                    </span>
+                    <md-icon md-svg-icon="icons:triangle-down"></md-icon>
             </div>
-        </pip-document>
-    </pip-main-body>
-    <pip-main-body ng-if="isEntryPage()" class="pip-main-body" ui-view></pip-main-body>
-</pip-main>
+                <md-menu-content width="3">
+                    <md-menu-item ng-repeat="theme in themes">
+                        <md-button ng-click="onThemeClick(theme)">{{theme | translate}}</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+
+        <md-menu md-position-mode="target-right target" ng-if="isTranslated">
+            <div class="layout-row layout-align-start-center" style="  cursor: pointer;outline: none; margin-right: 16px;"
+                      ng-click="$mdOpenMenu()"
+                      aria-label="language selection">
+                    <span >
+                        {{ $language | translate}}
+                    </span>
+                    <md-icon md-svg-icon="icons:triangle-down"></md-icon>
+            </div>
+                <md-menu-content width="3">
+                    <md-menu-item ng-repeat="lang in languages">
+                        <md-button ng-click="onLanguageClick(lang)">{{lang | translate}}</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+    </div>
+</md-toolbar>
+
+<div class="layout-row flex">
+    <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')"
+                class="md-whiteframe-z2 md-sidenav-left layout-column color-content-bg">
+        <md-list>
+            <md-list-item ng-repeat="contentItem in content"
+                          ng-click="onSwitchPage(contentItem.state)"
+                          ng-class="{ 'selected-state': isActiveState(contentItem.state) }">
+                <p ui-sref="{{contentItem.state}}">{{contentItem.title}}</p>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+
+    <md-content id="content" class="p24-flex flex">
+        <div ui-view></div>
+    </md-content>
+</div>
 </body>
 </html>

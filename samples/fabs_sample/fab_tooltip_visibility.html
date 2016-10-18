@@ -2,7 +2,7 @@
                    pip-fab-tooltip-visibility="opened"
                    pip-fab-show-tooltip="showTooltip"
                    md-open="opened"
-                   class="md-fab-bottom-right md-scale">
+                   class="md-fab-bottom-right md-fling md-hover-full">
     <md-fab-trigger>
         <md-button aria-label="menu" class="md-fab md-accent">
             <md-icon md-svg-icon="icons:plus"></md-icon>
@@ -14,17 +14,12 @@
             <md-button aria-label="NEW-GOAL"
                        class="md-fab md-accent md-mini"
                        style="height: 40px; margin: 6px 8px"
-                       ng-disabled="transaction.busy()"
-                       ui-sref="goals.new({
-                                  timing: timeCategory,
-                                  parent_id: parent.id,
-                                  def_type: button.type,
-                                  party_id: $party.id})">
+                       ng-click="onClick()">
 
                 <md-tooltip md-visible="showTooltip"
                             md-direction="left">{{::button.tooltip }}
                 </md-tooltip>
-                <md-icon md-svg-icon="{{button.icon}}"></md-icon>
+                <md-icon md-svg-icon="{{button.icon }}"></md-icon>
             </md-button>
         </div>
     </md-fab-actions>
