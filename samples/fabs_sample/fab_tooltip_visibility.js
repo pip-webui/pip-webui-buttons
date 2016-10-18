@@ -6,7 +6,25 @@
     var thisModule = angular.module('appBasicBehaviors.FabTooltipVisibility', []);
 
     thisModule.controller('FabTooltipVisibilityController',
-        function($scope) {
+        function($scope, $injector) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    SAMPLE: 'Sample',                    
+                    CODE: 'Code'
+                });
+                pipTranslate.translations('ru', {
+                    SAMPLE: 'Пример',  
+                    CODE: 'Пример кода'
+                });
+                $scope.sample = pipTranslate.translate('SAMPLE');
+                $scope.code = pipTranslate.translate('CODE');  
+            } else {
+                $scope.sample = 'Sample';
+                $scope.code = 'Code';   
+            }
+
             $scope.speedDialButtons = [
                 {icon: 'icons:goal', tooltip: 'ADD GOAL'}
             ];

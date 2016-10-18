@@ -4,18 +4,46 @@
     var thisModule = angular.module('appButtons.ToggleButtons', []);
 
     thisModule.controller('ToggleButtonsController',
-        function ($scope, $timeout) {
+        function($scope, $injector, $timeout) {
+            var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
-        // pipTranslateProvider.translations('en', {
-        //     INITIALIZED: 'Initialized',
-        //     NOT: 'Not',
-        //     COLORED: 'Colored'
-        // });
-        // pipTranslateProvider.translations('ru', {
-        //     INITIALIZED: 'Инициализированный',
-        //     NOT: 'Не',
-        //     COLORED: 'Цветной'
-        // });
+            if (pipTranslate) {
+                pipTranslate.translations('en', {
+                    SAMPLE: 'Sample',                    
+                    CODE: 'Code',
+                    LOW: 'Low',
+                    NORMAL: 'Normal',
+                    HIGH: 'High',
+                    INITIALIZED: 'Initialized',
+                    NOT_TEXT: 'Not',
+                    DISABLED: 'Disabled',
+                    COLORED: 'Colored'                    
+                });
+                pipTranslate.translations('ru', {
+                    SAMPLE: 'Пример',  
+                    CODE: 'Пример кода',
+                    LOW: 'Низкий',
+                    NORMAL: 'Средний',
+                    HIGH: 'Высокий',                    
+                    INITIALIZED: 'Инициализированный',
+                    NOT_TEXT: 'Не',
+                    DISABLED: 'Не активна',
+                    COLORED: 'Цветной'                    
+                });
+                $scope.initialized = pipTranslate.translate('INITIALIZED');
+                $scope.sample = pipTranslate.translate('SAMPLE');
+                $scope.code = pipTranslate.translate('CODE');  
+                $scope.notText = pipTranslate.translate('NOT_TEXT');  
+                $scope.colored = pipTranslate.translate('COLORED');  
+                $scope.disabled = pipTranslate.translate('DISABLED');  
+            } else {
+                $scope.initialized = 'Initialized';
+                $scope.notText = 'Not';
+                $scope.colored = 'Colored';
+                $scope.sample = 'Sample';
+                $scope.code = 'Code';   
+                $scope.disabled = 'Disabled';   
+            }
 
             $timeout(function() {
                 $('pre code').each(function(i, block) {
