@@ -1,22 +1,3 @@
-/**
- * @file Registration of basic WebUI controls
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function (angular) {
-    'use strict';
-
-    angular.module('pipButtons', [
-        'pipToggleButtons',
-        'pipRefreshButton',
-        'pipFabTooltipVisibility'
-    ]);
-
-})(window.angular);
-
-
 (function(module) {
 try {
   module = angular.module('pipButtons.Templates');
@@ -48,6 +29,25 @@ module.run(['$templateCache', function($templateCache) {
     '');
 }]);
 })();
+
+/**
+ * @file Registration of basic WebUI controls
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function (angular) {
+    'use strict';
+
+    angular.module('pipButtons', [
+        'pipToggleButtons',
+        'pipRefreshButton',
+        'pipFabTooltipVisibility'
+    ]);
+
+})(window.angular);
+
 
 /**
  * @file Optional filter to translate string resources
