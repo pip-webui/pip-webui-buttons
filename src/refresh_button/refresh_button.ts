@@ -1,9 +1,6 @@
-/**
- * @file Refresh button control
- * @copyright Digital Living Software Corp. 2014-2016
- */
+/// <reference path="../../typings/tsd.d.ts" />
 
-(function (angular) {
+(function () {
     'use strict';
 
     var thisModule = angular.module('pipRefreshButton', ['ngMaterial']);
@@ -19,7 +16,7 @@
                 '<span class="pip-refresh-text"></span>' +
                 '</md-button>',
                 replace: false,
-                link: function ($scope, $element, $attrs) {
+                link: function ($scope, $element, $attrs: any) {
                     var width, text, show,
                         textGetter = $parse($attrs.pipText),
                         visibleGetter = $parse($attrs.pipVisible),
@@ -64,5 +61,5 @@
         }
     );
 
-})(window.angular);
+})();
 
