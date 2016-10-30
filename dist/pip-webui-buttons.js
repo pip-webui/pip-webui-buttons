@@ -1,37 +1,4 @@
-(function(module) {
-try {
-  module = angular.module('pipButtons.Templates');
-} catch (e) {
-  module = angular.module('pipButtons.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('toggle_buttons/toggle_buttons.html',
-    '<div class="pip-toggle-buttons layout-row {{class}}" pip-selected="bufButtonIndex" pip-enter-space-press="enterSpacePress($event)"\n' +
-    '     ng-if="$mdMedia(\'gt-xs\')">\n' +
-    '    <md-button tabindex="-1" ng-repeat="button in buttons"\n' +
-    '               ng-class="{\'md-accent md-raised selected color-accent-bg\' : currentButtonIndex == $index}"\n' +
-    '               ng-attr-style="{{ \'background-color:\' + (currentButtonIndex == $index ? button.backgroundColor : \'\') + \'!important\' }}"\n' +
-    '               class="pip-selectable pip-chip-button flex" ng-click="buttonSelected($index, $event)"\n' +
-    '               ng-disabled="button.disabled || disabled()">\n' +
-    '        {{button.name || button.title | translate}}\n' +
-    '        <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span>\n' +
-    '    </md-button>\n' +
-    '</div>\n' +
-    '\n' +
-    '<md-input-container class="md-block" ng-if="$mdMedia(\'xs\')">\n' +
-    '    <md-select ng-model="currentButtonIndex" ng-disabled="disabled()" aria-label="DROPDOWN" md-on-close="buttonSelected(currentButtonIndex)">\n' +
-    '        <md-option ng-repeat="action in buttons" value="{{ ::$index }}">\n' +
-    '            {{ (action.title || action.name) | translate }}\n' +
-    '            <span ng-if="action.checked || action.complete || action.filled" class="pip-tagged">*</span>\n' +
-    '        </md-option>\n' +
-    '    </md-select>\n' +
-    '</md-input-container>\n' +
-    '');
-}]);
-})();
-
-
-
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function () {
     'use strict';
     angular.module('pipButtons', [
@@ -40,7 +7,7 @@ module.run(['$templateCache', function($templateCache) {
         'pipFabTooltipVisibility'
     ]);
 })();
-
+},{}],2:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipButtons.Translate', []);
@@ -52,7 +19,7 @@ module.run(['$templateCache', function($templateCache) {
         };
     }]);
 })();
-
+},{}],3:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module("pipFabTooltipVisibility", []);
@@ -76,7 +43,7 @@ module.run(['$templateCache', function($templateCache) {
         };
     }]);
 })();
-
+},{}],4:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipRefreshButton', ['ngMaterial']);
@@ -120,7 +87,7 @@ module.run(['$templateCache', function($templateCache) {
         };
     }]);
 })();
-
+},{}],5:[function(require,module,exports){
 (function () {
     'use strict';
     var thisModule = angular.module('pipToggleButtons', ['pipButtons.Templates']);
@@ -180,7 +147,42 @@ module.run(['$templateCache', function($templateCache) {
         };
     });
 })();
+},{}],6:[function(require,module,exports){
+(function(module) {
+try {
+  module = angular.module('pipButtons.Templates');
+} catch (e) {
+  module = angular.module('pipButtons.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('toggle_buttons/toggle_buttons.html',
+    '<div class="pip-toggle-buttons layout-row {{class}}" pip-selected="bufButtonIndex" pip-enter-space-press="enterSpacePress($event)"\n' +
+    '     ng-if="$mdMedia(\'gt-xs\')">\n' +
+    '    <md-button tabindex="-1" ng-repeat="button in buttons"\n' +
+    '               ng-class="{\'md-accent md-raised selected color-accent-bg\' : currentButtonIndex == $index}"\n' +
+    '               ng-attr-style="{{ \'background-color:\' + (currentButtonIndex == $index ? button.backgroundColor : \'\') + \'!important\' }}"\n' +
+    '               class="pip-selectable pip-chip-button flex" ng-click="buttonSelected($index, $event)"\n' +
+    '               ng-disabled="button.disabled || disabled()">\n' +
+    '        {{button.name || button.title | translate}}\n' +
+    '        <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span>\n' +
+    '    </md-button>\n' +
+    '</div>\n' +
+    '\n' +
+    '<md-input-container class="md-block" ng-if="$mdMedia(\'xs\')">\n' +
+    '    <md-select ng-model="currentButtonIndex" ng-disabled="disabled()" aria-label="DROPDOWN" md-on-close="buttonSelected(currentButtonIndex)">\n' +
+    '        <md-option ng-repeat="action in buttons" value="{{ ::$index }}">\n' +
+    '            {{ (action.title || action.name) | translate }}\n' +
+    '            <span ng-if="action.checked || action.complete || action.filled" class="pip-tagged">*</span>\n' +
+    '        </md-option>\n' +
+    '    </md-select>\n' +
+    '</md-input-container>\n' +
+    '');
+}]);
+})();
 
+
+
+},{}]},{},[1,2,3,4,5,6])
 
 
 //# sourceMappingURL=pip-webui-buttons.js.map
