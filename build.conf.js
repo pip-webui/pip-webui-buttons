@@ -2,7 +2,7 @@ module.exports = {
     module: {
         name: 'pipButtons',
         styles: 'buttons',
-        export: 'pip',
+        export: 'pip.buttons',
         standalone: 'pip.buttons'
     },
     build: {
