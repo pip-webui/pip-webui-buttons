@@ -156,27 +156,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('toggle_buttons/toggle_buttons.html',
-    '<div class="pip-toggle-buttons layout-row {{class}}" pip-selected="bufButtonIndex" pip-enter-space-press="enterSpacePress($event)"\n' +
-    '     ng-if="$mdMedia(\'gt-xs\')">\n' +
-    '    <md-button tabindex="-1" ng-repeat="button in buttons"\n' +
-    '               ng-class="{\'md-accent md-raised selected color-accent-bg\' : currentButtonIndex == $index}"\n' +
-    '               ng-attr-style="{{ \'background-color:\' + (currentButtonIndex == $index ? button.backgroundColor : \'\') + \'!important\' }}"\n' +
-    '               class="pip-selectable pip-chip-button flex" ng-click="buttonSelected($index, $event)"\n' +
-    '               ng-disabled="button.disabled || disabled()">\n' +
-    '        {{button.name || button.title | translate}}\n' +
-    '        <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span>\n' +
-    '    </md-button>\n' +
-    '</div>\n' +
-    '\n' +
-    '<md-input-container class="md-block" ng-if="$mdMedia(\'xs\')">\n' +
-    '    <md-select ng-model="currentButtonIndex" ng-disabled="disabled()" aria-label="DROPDOWN" md-on-close="buttonSelected(currentButtonIndex)">\n' +
-    '        <md-option ng-repeat="action in buttons" value="{{ ::$index }}">\n' +
-    '            {{ (action.title || action.name) | translate }}\n' +
-    '            <span ng-if="action.checked || action.complete || action.filled" class="pip-tagged">*</span>\n' +
-    '        </md-option>\n' +
-    '    </md-select>\n' +
-    '</md-input-container>\n' +
-    '');
+    '<div class="pip-toggle-buttons layout-row {{class}}" pip-selected="bufButtonIndex" pip-enter-space-press="enterSpacePress($event)" ng-if="$mdMedia(\'gt-xs\')"><md-button tabindex="-1" ng-repeat="button in buttons" ng-class="{\'md-accent md-raised selected color-accent-bg\' : currentButtonIndex == $index}" ng-attr-style="{{ \'background-color:\' + (currentButtonIndex == $index ? button.backgroundColor : \'\') + \'!important\' }}" class="pip-selectable pip-chip-button flex" ng-click="buttonSelected($index, $event)" ng-disabled="button.disabled || disabled()">{{button.name || button.title | translate}} <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span></md-button></div><md-input-container class="md-block" ng-if="$mdMedia(\'xs\')"><md-select ng-model="currentButtonIndex" ng-disabled="disabled()" aria-label="DROPDOWN" md-on-close="buttonSelected(currentButtonIndex)"><md-option ng-repeat="action in buttons" value="{{ ::$index }}">{{ (action.title || action.name) | translate }} <span ng-if="action.checked || action.complete || action.filled" class="pip-tagged">*</span></md-option></md-select></md-input-container>');
 }]);
 })();
 

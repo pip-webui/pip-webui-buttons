@@ -4,10 +4,5 @@ declare module pip.buttons {
 
 
 
-
-
-
-
-
 }
 
