@@ -14,7 +14,8 @@
                     buttons: '=pipButtons',
                     currentButtonValue: '=ngModel',
                     currentButton: '=?pipButtonObject',
-                    change: '&ngChange'
+                    change: '&ngChange',
+                    onlyToggle: '=?pipOnlyToggle'
                 },
                 templateUrl: 'toggle_buttons/toggle_buttons.html',
                 controller: function ($scope, $element, $attrs, $mdMedia, $timeout) {
