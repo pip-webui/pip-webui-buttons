@@ -41,7 +41,7 @@
                         $button.hide();
                     }
 
-                    $scope.onClick = function () {
+                    (<any>$scope).onClick = function () {
                         refreshGetter($scope);
                     };
 
@@ -53,7 +53,7 @@
                         }
                     });
 
-                    $scope.$watch(textGetter, function (newValue) {
+                    $scope.$watch(textGetter, function (newValue: string) {
                         $text.text(newValue);
                     });
                 }
