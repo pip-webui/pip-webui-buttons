@@ -1,8 +1,8 @@
 <div class="pip-toggle-buttons layout-row {{class}}" pip-selected="bufButtonIndex" pip-enter-space-press="enterSpacePress($event)"
      ng-if="$mdMedia('gt-xs') || onlyToggle">
     <md-button tabindex="-1" ng-repeat="button in buttons"
-               ng-class="{'md-accent md-raised selected color-accent-bg' : currentButtonIndex == $index}"
-               ng-attr-style="{{ 'background-color:' + (currentButtonIndex == $index ? button.backgroundColor : '') + '!important' }}"
+               ng-class="{'md-accent md-raised selected color-accent-bg' : highlightButton($index)}"
+               ng-attr-style="{{ 'background-color:' + (highlightButton($index) ? button.backgroundColor : '') + '!important' }}"
                class="pip-selectable pip-chip-button flex" ng-click="buttonSelected($index, $event)"
                ng-disabled="button.disabled || disabled()">
         {{button.name || button.title | translate}}

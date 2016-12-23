@@ -17,7 +17,8 @@
                     INITIALIZED: 'Initialized',
                     NOT_TEXT: 'Not',
                     DISABLED: 'Disabled',
-                    COLORED: 'Colored'                    
+                    COLORED: 'Colored',
+                    MULTI: 'Multiselectable'                
                 });
                 pipTranslate.translations('ru', {
                     SAMPLE: 'Пример',  
@@ -28,7 +29,8 @@
                     INITIALIZED: 'Инициализированный',
                     NOT_TEXT: 'Не',
                     DISABLED: 'Не активна',
-                    COLORED: 'Цветной'                    
+                    COLORED: 'Цветной',
+                    MULTI: 'Выбор нескольких вариантов'                    
                 });
                 $scope.initialized = pipTranslate.translate('INITIALIZED');
                 $scope.sample = pipTranslate.translate('SAMPLE');
@@ -36,6 +38,7 @@
                 $scope.notText = pipTranslate.translate('NOT_TEXT');  
                 $scope.colored = pipTranslate.translate('COLORED');  
                 $scope.disabled = pipTranslate.translate('DISABLED');  
+                $scope.multi = pipTranslate.translate('MULTI');  
             } else {
                 $scope.initialized = 'Initialized';
                 $scope.notText = 'Not';
@@ -53,9 +56,10 @@
             });
 
             $scope.buttonsCollection = [
-                {id: 'type LOW', name: 'LOW', disabled: false, filled: true},
-                {id: 'type NORMAL', name: 'NORMAL', disabled: false},
-                {id: 'type HIGH', name: 'HIGH', disabled: false}
+                {id: 'type LOW', name: 'LOW', disabled: false, filled: true, level: 0},
+                {id: 'type NORMAL', name: 'NORMAL', disabled: false, level: 1},
+                {id: 'type HIGH', name: 'HIGH', disabled: false, level: 2},
+                {id: 'type NONE', name: 'None', disabled: false}
             ];
             $scope.buttonsCollection2 = [
                 {id: 'type 1', name: 'LOW', disabled: false},

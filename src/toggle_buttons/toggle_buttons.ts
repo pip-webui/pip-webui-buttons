@@ -14,6 +14,7 @@
                     buttons: '=pipButtons',
                     currentButtonValue: '=ngModel',
                     currentButton: '=?pipButtonObject',
+                    multiselect: '=?pipMultiselect',
                     change: '&ngChange',
                     onlyToggle: '=?pipOnlyToggle'
                 },
@@ -23,6 +24,7 @@
 
                     $scope.$mdMedia = $mdMedia;
                     $scope.class = $attrs.class || '';
+                    $scope.multiselect = $scope.multiselect || false;
 
                     if (!$scope.buttons || _.isArray($scope.buttons) && $scope.buttons.length === 0) {
                         $scope.buttons = [];
@@ -58,6 +60,14 @@
                             return $scope.ngDisabled();
                         }
                     };
+
+                    $scope.highlightButton = function (index) {
+                        if ($scope.multiselect && $scope.currentButton.level !== undefined && $scope.buttons[index].level !== undefined) {
+                           return $scope.currentButton.level >= $scope.buttons[index].level;
+                        } else {
+                            return $scope.currentButtonIndex == index;
+                        }
+                    }
                 },
                 link: function (scope, elem) {
                     elem

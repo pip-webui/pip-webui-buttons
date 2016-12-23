@@ -5,10 +5,10 @@
         [
             'ngMaterial',
             'ui.router', 'ui.utils', 'ngResource', 'ngAria', 'ngCookies', 'ngSanitize', 'ngMessages',
-            'ngMaterial', 'wu.masonry', 'LocalStorageModule', 'angularFileUpload', 'ngAnimate',
+            'ngMaterial', 'wu.masonry', 'LocalStorageModule', 'ngAnimate',
 
             'pipServices',
-            'pipTheme.Default', 'pipTheme.Bootbarn', 'pipTheme', 
+            'pipTheme.Default', 'pipTheme', 
 
             'pipButtons',
             'appButtons.Refresh', 'appButtons.ToggleButtons', 'appComponentsStyles.ActionList',
