@@ -1,6 +1,12 @@
 declare module pip.buttons {
 
 
+class FabTooltipVisibilityController {
+    private _element;
+    private _scope;
+    private _timeout;
+    constructor($mdMedia: angular.material.IMedia, $element: any, $attrs: angular.IAttributes, $scope: angular.IScope, $timeout: ng.ITimeoutService, $parse: any);
+}
 
 
 class ToggleButtonsController {
@@ -16,7 +22,7 @@ class ToggleButtonsController {
     currentButton: any;
     buttonSelected: any;
     disabled: any;
-    enterSpacePress: any;
+    enterSpacePress: Function;
     ngDisabled: Function;
     highlightButton: any;
     change: Function;

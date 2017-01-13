@@ -20,28 +20,36 @@
     }]);
 })();
 },{}],3:[function(require,module,exports){
+var FabTooltipVisibilityController = (function () {
+    FabTooltipVisibilityController.$inject = ['$mdMedia', '$element', '$attrs', '$scope', '$timeout', '$parse'];
+    function FabTooltipVisibilityController($mdMedia, $element, $attrs, $scope, $timeout, $parse) {
+        "ngInject";
+        var trigGetter = $parse($attrs['pipFabTooltipVisibility']), showGetter = $parse(['pipFabShowTooltip']), showSetter = showGetter.assign;
+        $scope.$watch(trigGetter, function (isOpen) {
+            if (isOpen) {
+                $timeout(function () {
+                    showSetter($scope, isOpen);
+                }, 600);
+            }
+            else {
+                showSetter($scope, isOpen);
+            }
+        });
+    }
+    return FabTooltipVisibilityController;
+}());
 (function () {
-    'use strict';
-    var thisModule = angular.module("pipFabTooltipVisibility", []);
-    thisModule.directive("pipFabTooltipVisibility", ['$parse', '$timeout', function ($parse, $timeout) {
+    pipFabTooltipVisibility.$inject = ['$parse', '$timeout'];
+    function pipFabTooltipVisibility($parse, $timeout) {
         return {
             restrict: 'A',
             scope: false,
-            controller: ['$scope', '$attrs', function ($scope, $attrs) {
-                var trigGetter = $parse($attrs.pipFabTooltipVisibility), showGetter = $parse($attrs.pipFabShowTooltip), showSetter = showGetter.assign;
-                $scope.$watch(trigGetter, function (isOpen) {
-                    if (isOpen) {
-                        $timeout(function () {
-                            showSetter($scope, isOpen);
-                        }, 600);
-                    }
-                    else {
-                        showSetter($scope, isOpen);
-                    }
-                });
-            }]
+            controller: FabTooltipVisibilityController
         };
-    }]);
+    }
+    angular
+        .module('pipFabTooltipVisibility', [])
+        .directive('pipFabTooltipVisibility', pipFabTooltipVisibility);
 })();
 },{}],4:[function(require,module,exports){
 (function () {

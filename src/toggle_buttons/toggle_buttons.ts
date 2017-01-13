@@ -14,7 +14,7 @@ class ToggleButtonsController {
     public currentButton;
     public buttonSelected;
     public disabled;
-    public enterSpacePress;
+    public enterSpacePress: Function;
     public ngDisabled: Function;
     public highlightButton;
     public change: Function;

@@ -1,5 +1,5 @@
 /// <reference path="../../typings/tsd.d.ts" />
-
+/*
 (function(){
     'use strict';
 
@@ -10,21 +10,55 @@
             restrict: 'A',
             scope: false,
             controller: function($scope, $attrs) {
-                var trigGetter = $parse($attrs.pipFabTooltipVisibility),
-                    showGetter = $parse($attrs.pipFabShowTooltip),
+               
+            }
+        };
+    });
+
+})();*/
+
+
+class FabTooltipVisibilityController {
+    private _element;
+    private _scope: angular.IScope;
+    private _timeout: ng.ITimeoutService;
+
+    constructor(
+        $mdMedia: angular.material.IMedia,
+        $element: any,
+        $attrs: angular.IAttributes,
+        $scope: angular.IScope,
+        $timeout: ng.ITimeoutService,
+        $parse
+    ) {
+        "ngInject";
+          var trigGetter = $parse($attrs['pipFabTooltipVisibility']),
+                    showGetter = $parse(['pipFabShowTooltip']),
                     showSetter = showGetter.assign;
 
-                $scope.$watch(trigGetter, function(isOpen) {
+                $scope.$watch(trigGetter, (isOpen) => {
                     if (isOpen) {
-                        $timeout(function() {
+                        $timeout(() => {
                             showSetter($scope, isOpen);
                         }, 600);
                     } else {
                         showSetter($scope, isOpen);
                     }
                 });
-            }
+    }
+}
+
+(() => {
+    function pipFabTooltipVisibility($parse, $timeout) {
+        return {
+            restrict: 'A',
+            scope: false,
+            controller: FabTooltipVisibilityController
         };
-    });
+    }
+
+    angular
+        .module('pipFabTooltipVisibility', [])
+        .directive('pipFabTooltipVisibility', pipFabTooltipVisibility);
 
 })();
