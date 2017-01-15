@@ -1,121 +1,121 @@
-/// <reference path="../../typings/tsd.d.ts" />
+// /// <reference path="../../typings/tsd.d.ts" />
 
-class ToggleButtonsController {
-    private _element;
-    private _scope: angular.IScope;
-    private _timeout: ng.ITimeoutService;
+// class ToggleButtonsController {
+//     private _element;
+//     private _scope: angular.IScope;
+//     private _timeout: ng.ITimeoutService;
 
-    public $mdMedia: angular.material.IMedia;
-    public class: string;
-    public multiselect: boolean;
-    public buttons;
-    public currentButtonValue;
-    public currentButtonIndex: number;
-    public currentButton;
-    public buttonSelected;
-    public disabled;
-    public enterSpacePress: Function;
-    public ngDisabled: Function;
-    public highlightButton;
-    public change: Function;
-    public onlyToggle: boolean;
+//     public $mdMedia: angular.material.IMedia;
+//     public class: string;
+//     public multiselect: boolean;
+//     public buttons;
+//     public currentButtonValue;
+//     public currentButtonIndex: number;
+//     public currentButton;
+//     public buttonSelected;
+//     public disabled;
+//     public enterSpacePress: Function;
+//     public ngDisabled: Function;
+//     public highlightButton;
+//     public change: Function;
+//     public onlyToggle: boolean;
     
-    constructor(
-        $mdMedia: angular.material.IMedia,
-        $element: any,
-        $attrs: angular.IAttributes,
-        $scope: angular.IScope,
-        $timeout: ng.ITimeoutService
-    ) {
-        "ngInject";
-         this.$mdMedia = $mdMedia;
-         this.class = $attrs['class'] || '';
-         this.multiselect = $scope['multiselect'] || false;
-         this.ngDisabled = $scope['ngDisabled'];
-         this.currentButtonValue = $scope['currentButtonValue'];
-         this.currentButton = $scope['currentButton'];
-         this.change = $scope['change'];
-         this.onlyToggle = $scope['onlyToggle'];
+//     constructor(
+//         $mdMedia: angular.material.IMedia,
+//         $element: any,
+//         $attrs: angular.IAttributes,
+//         $scope: angular.IScope,
+//         $timeout: ng.ITimeoutService
+//     ) {
+//         "ngInject";
+//          this.$mdMedia = $mdMedia;
+//          this.class = $attrs['class'] || '';
+//          this.multiselect = $scope['multiselect'] || false;
+//          this.ngDisabled = $scope['ngDisabled'];
+//          this.currentButtonValue = $scope['currentButtonValue'];
+//          this.currentButton = $scope['currentButton'];
+//          this.change = $scope['change'];
+//          this.onlyToggle = $scope['onlyToggle'];
 
-         this.buttons = !$scope['buttons'] || _.isArray($scope['buttons']) && $scope['buttons'].length === 0 ? 
-                        [] : $scope['buttons'];
+//          this.buttons = !$scope['buttons'] || _.isArray($scope['buttons']) && $scope['buttons'].length === 0 ? 
+//                         [] : $scope['buttons'];
          
-        let index = _.indexOf(this.buttons, _.find(this.buttons, {id: this.currentButtonValue}));
-        this.currentButtonIndex = index < 0 ? 0 : index;
-        this.currentButton = this.buttons.length > 0 ? this.buttons[this.currentButtonIndex] : this.currentButton;
+//         let index = _.indexOf(this.buttons, _.find(this.buttons, {id: this.currentButtonValue}));
+//         this.currentButtonIndex = index < 0 ? 0 : index;
+//         this.currentButton = this.buttons.length > 0 ? this.buttons[this.currentButtonIndex] : this.currentButton;
        
-        this.buttonSelected = (index) => {
-            if (this.disabled()) { return; }
-            this.currentButtonIndex = index;
-            this.currentButton = this.buttons[this.currentButtonIndex];
-            this.currentButtonValue = this.currentButton.id || index;
+//         this.buttonSelected = (index) => {
+//             if (this.disabled()) { return; }
+//             this.currentButtonIndex = index;
+//             this.currentButton = this.buttons[this.currentButtonIndex];
+//             this.currentButtonValue = this.currentButton.id || index;
 
-            $timeout( () => {
-                if (this.change) {
-                    this.change();
-                } });
-        };
+//             $timeout( () => {
+//                 if (this.change) {
+//                     this.change();
+//                 } });
+//         };
 
-        this.enterSpacePress = (event) => {
-             this.buttonSelected(event.index);
-        };
+//         this.enterSpacePress = (event) => {
+//              this.buttonSelected(event.index);
+//         };
 
-        this.disabled = () => {
-            if (this.ngDisabled) { 
-                return this.ngDisabled(); 
-            }
-        };
+//         this.disabled = () => {
+//             if (this.ngDisabled) { 
+//                 return this.ngDisabled(); 
+//             }
+//         };
 
-        this.highlightButton = (index) => {
-            if (this.multiselect && 
-                !_.isUndefined(this.currentButton.level) && 
-                !_.isUndefined(this.buttons[index].level)) {
+//         this.highlightButton = (index) => {
+//             if (this.multiselect && 
+//                 !_.isUndefined(this.currentButton.level) && 
+//                 !_.isUndefined(this.buttons[index].level)) {
 
-                return this.currentButton.level >= this.buttons[index].level;
-            } 
+//                 return this.currentButton.level >= this.buttons[index].level;
+//             } 
 
-            return this.currentButtonIndex == index;
-        }
-    }
+//             return this.currentButtonIndex == index;
+//         }
+//     }
 
 
-}
+// }
 
-(() => {
-    function ToggleButtonsDirective() {
-        return {
-            restrict: 'EA',
-            controller: ToggleButtonsController,
-            controllerAs: 'toggle',
-            scope: {
-                ngDisabled: '&',
-                buttons: '=pipButtons',
-                currentButtonValue: '=ngModel',
-                currentButton: '=?pipButtonObject',
-                multiselect: '=?pipMultiselect',
-                change: '&ngChange',
-                onlyToggle: '=?pipOnlyToggle'
-            },
-            link: function (scope, elem) {
-                elem
-                    .on('focusin', function () {
-                        elem.addClass('focused-container');
-                    })
-                    .on('focusout', function () {
-                        elem.removeClass('focused-container');
-                    });
-            },
-            templateUrl: 'toggle_buttons/toggle_buttons.html'
-        };
-    }
+// (() => {
+//     function ToggleButtonsDirective() {
+//         return {
+//             restrict: 'EA',
+//             controller: ToggleButtonsController,
+//             controllerAs: 'toggle',
+//             scope: {
+//                 ngDisabled: '&',
+//                 buttons: '=pipButtons',
+//                 currentButtonValue: '=ngModel',
+//                 currentButton: '=?pipButtonObject',
+//                 multiselect: '=?pipMultiselect',
+//                 change: '&ngChange',
+//                 onlyToggle: '=?pipOnlyToggle'
+//             },
+//             link: function (scope, elem) {
+//                 elem
+//                     .on('focusin', function () {
+//                         elem.addClass('focused-container');
+//                     })
+//                     .on('focusout', function () {
+//                         elem.removeClass('focused-container');
+//                     });
+//             },
+//             templateUrl: 'toggle_buttons/toggle_buttons.html'
+//         };
+//     }
 
-    angular
-        .module('pipToggleButtons', ['pipButtons.Templates'])
-        .directive('pipToggleButtons', ToggleButtonsDirective);
+//     angular
+//         .module('pipToggleButtons', ['pipButtons.Templates'])
+//         .directive('pipToggleButtons', ToggleButtonsDirective);
 
-})();
+// })();
 
-/*
+
 (function () {
     'use strict';
 
@@ -200,4 +200,4 @@ class ToggleButtonsController {
     );
 
 })(); 
-*/
+
