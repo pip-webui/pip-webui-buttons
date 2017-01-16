@@ -156,6 +156,16 @@
                         if ($scope.disabled()) {
                             return;
                         }
+                        
+                        if ($scope.buttons[index].diselectable === true && index === $scope.currentButtonIndex 
+                                && $scope.buttons[index].level !== undefined) 
+                        {
+                            let curLevel = $scope.buttons[index].level, tmp;
+                            curLevel--;
+
+                            tmp = _.findIndex($scope.buttons, (b) => { return b['level'] === curLevel; });
+                            index = tmp > -1 ? tmp: index;
+                        }
 
                         $scope.currentButtonIndex = index;
                         $scope.currentButton = $scope.buttons[$scope.currentButtonIndex];
