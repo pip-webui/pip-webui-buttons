@@ -28,10 +28,12 @@
             $scope.speedDialButtons = [
                 {icon: 'icons:goal', tooltip: 'ADD GOAL'}
             ];
+            $scope.opened = false;
             $scope.showTooltip = false;
 
             $scope.onClick = function () {
                 $scope.showTooltip = false;    
+                
             }
         }
     );

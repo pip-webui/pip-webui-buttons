@@ -24,7 +24,7 @@ var FabTooltipVisibilityController = (function () {
     FabTooltipVisibilityController.$inject = ['$mdMedia', '$element', '$attrs', '$scope', '$timeout', '$parse'];
     function FabTooltipVisibilityController($mdMedia, $element, $attrs, $scope, $timeout, $parse) {
         "ngInject";
-        var trigGetter = $parse($attrs['pipFabTooltipVisibility']), showGetter = $parse(['pipFabShowTooltip']), showSetter = showGetter.assign;
+        var trigGetter = $parse($attrs['pipFabTooltipVisibility']), showGetter = $parse($attrs['pipFabShowTooltip']), showSetter = showGetter.assign;
         $scope.$watch(trigGetter, function (isOpen) {
             if (isOpen) {
                 $timeout(function () {

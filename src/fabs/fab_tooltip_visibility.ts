@@ -32,9 +32,9 @@ class FabTooltipVisibilityController {
         $parse
     ) {
         "ngInject";
-          var trigGetter = $parse($attrs['pipFabTooltipVisibility']),
-                    showGetter = $parse(['pipFabShowTooltip']),
-                    showSetter = showGetter.assign;
+          let trigGetter = $parse($attrs['pipFabTooltipVisibility']),
+              showGetter = $parse($attrs['pipFabShowTooltip']),
+              showSetter = showGetter.assign;
 
                 $scope.$watch(trigGetter, (isOpen) => {
                     if (isOpen) {
