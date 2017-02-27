@@ -56,10 +56,10 @@
             });
 
             $scope.buttonsCollection = [
-                {id: 'type LOW', name: 'LOW', disabled: false, filled: true, level: 0},
-                {id: 'type NORMAL', name: 'NORMAL', disabled: false, level: 1, diselectable: true},
-                {id: 'type HIGH', name: 'HIGH', disabled: false, level: 2, diselectable: true},
-                {id: 'type NONE', name: 'None', disabled: false}
+                {id: 1, name: 'LOW', disabled: false, filled: true, level: 0},
+                {id: 2, name: 'NORMAL', disabled: false, level: 1, diselectable: true},
+                {id: 3, name: 'HIGH', disabled: false, level: 2, diselectable: true},
+                {id: 0, name: 'None', disabled: false}
             ];
             $scope.buttonsCollection2 = [
                 {id: 'type 1', name: 'LOW', disabled: false},

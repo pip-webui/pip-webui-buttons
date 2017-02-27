@@ -169,7 +169,7 @@
 
                         $scope.currentButtonIndex = index;
                         $scope.currentButton = $scope.buttons[$scope.currentButtonIndex];
-                        $scope.currentButtonValue = $scope.currentButton.id || index;
+                        $scope.currentButtonValue = $scope.currentButton.id === undefined ? index: $scope.currentButton.id;
 
                         $timeout(function () {
                             if ($scope.change) {
