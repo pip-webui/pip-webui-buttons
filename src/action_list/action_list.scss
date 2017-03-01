@@ -2,10 +2,10 @@
 // @copyright Digital Living Software Corp. 2014-2015
 
 .pip-action-list {
-  .flex();
-  .flex-direction(row);
-  .flex-vertical-content(center);
-  .flex-justify-content(center, center);
+  @include flex();
+  @include flex-direction(row);
+  @include flex-vertical-content(center);
+  @include flex-justify-content(center, center);
 
   .md-button.pip-action-list-item {
     min-height: 64px !important;
@@ -23,7 +23,7 @@
       white-space: normal;
       word-wrap: break-word;
       vertical-align: middle;
-      font: @font-caption;
+      font: $font-caption;
       text-align: center;
       -webkit-user-select: auto;
 
