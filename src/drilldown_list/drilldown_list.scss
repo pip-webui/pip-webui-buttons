@@ -1,6 +1,6 @@
-// @file Drilldown List CSS styles
-// @copyright Digital Living Software Corp. 2014-2015
-// @todo
+// $file Drilldown List CSS styles
+// $copyright Digital Living Software Corp. 2014-2015
+// $todo
 // - Shall we use a regular list here?
 // - We shall define other components (pic, counter, chevron) 
 
@@ -13,15 +13,15 @@
     padding-right: 16px;
     border-radius: 0 !important;
 
-    md-icon{
-      .flex-fixed();
+    md-icon {
+      @include flex-fixed();
       min-width: 24px;
     }
 
-    .pip-content{
-      .flex();
-      .flex-direction(row);
-      .flex-vertical-content(center);
+    .pip-content {
+      @include flex();
+      @include flex-direction(row);
+      @include flex-vertical-content(center);
       width: 100%;
     }
 
@@ -40,19 +40,19 @@
       }
     }
   
-    .flex();
-    .flex-direction(row);
-    .flex-vertical-content(center);
-    .flex-justify-content(start, flex-start);
+    @include flex();
+    @include flex-direction(row);
+    @include flex-vertical-content(center);
+    @include flex-justify-content(start, flex-start);
   
     text-transform: none !important;//capitalize;
-    font: @font-subhead2;
+    font: $font-subhead2;
   
     .pip-title {
       text-align: justify;
       text-align: start;
-      .flex();
-      .text-overflow();
+      @include flex();
+      @include text-overflow();
       margin: 0;
       margin-right: 16px;
 
@@ -63,9 +63,9 @@
       box-sizing: border-box;
     }
 
-    .pip-subtitle{
-      font: @font-body1;
-      opacity: @opacity-secondary;
+    .pip-subtitle {
+      font: $font-body1;
+      opacity: $opacity-secondary;
       text-align: justify;
       text-align: start;
       margin: 0 24px 0 0;
@@ -77,14 +77,14 @@
       margin-right: 26px;
     }
 
-    &.pip-drilldown-list-item-lg{
+    &.pip-drilldown-list-item-lg {
       height: 64px;
-      .pip-title{
+      .pip-title {
         margin-top: 1px !important;
         margin-bottom: 4px !important;
       }
-      .pip-subcontent{
-        .text-overflow();
+      .pip-subcontent {
+        @include text-overflow();
       }
     }
   }
