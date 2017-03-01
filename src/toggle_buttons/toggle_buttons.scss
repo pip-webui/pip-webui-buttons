@@ -1,7 +1,7 @@
-// @file CSS styles for toggle buttons control
-// @copyright Digital Living Software Corp. 2014-2016
+// $file CSS styles for toggle buttons control
+// $copyright Digital Living Software Corp. 2014-2016
 
-@divider-button-border: 0;
+$divider-button-border: 0;
 pip-toggle-buttons {
   .md-select-value {
     .pip-tagged {
@@ -17,13 +17,13 @@ pip-toggle-buttons:focus {
 .dark,
 .black {
   .pip-toggle-buttons button {
-   // color: @color-primary-dark;
+   // color: $color-primary-dark;
   }
 }
 
 .pip-toggle-buttons {
-  .flex();
-  .flex-direction(row);
+  @include flex();
+  @include flex-direction(row);
   width: 100%;
   border-radius: 16px !important;
   height: 36px;
@@ -33,8 +33,8 @@ pip-toggle-buttons:focus {
   }
 
   button {
-    background-color: @color-divider;
-    color: @color-secondary;
+    background-color: $color-divider;
+    color: $color-secondary;
 
     &.pip-chip-button.md-button {
       text-align: -webkit-center;
@@ -78,8 +78,8 @@ pip-toggle-buttons:focus {
 
       & > span {
         font-size: 13px;
-        //font-family: @font-family;
-        .text-overflow();
+        //font-family: $font-family;
+        @include text-overflow();
         text-transform: uppercase !important;
       }
 
