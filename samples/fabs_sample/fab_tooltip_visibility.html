@@ -5,20 +5,22 @@
 <p class="text-subhead2 h48 m0 bm8 layout-row layout-align-start-center">
     {{sample}}
 </p>
-<md-fab-speed-dial md-direction="up"
-                   md-open="opened"
-                   class="md-fab-bottom-right md-fling md-hover-full">
+Show tooltip: {{ showTooltip }}
+Open: {{ opened }}
+<md-fab-speed-dial md-direction="up" md-open="opened" pip-fab-tooltip-visibility="opened" 
+    pip-fab-show-tooltip="showTooltip"
+    class="md-fab-bottom-right md-fling">
     <md-fab-trigger>
         <md-button aria-label="menu" class="md-fab md-accent">
             <md-icon md-svg-icon="icons:plus"></md-icon>
         </md-button>
     </md-fab-trigger>
-    <md-fab-actions>
+    <md-fab-actions style="z-index: -20;">
         <div ng-repeat="button in speedDialButtons">
-            <md-button aria-label="NEW-GOAL" class="md-fab md-accent md-mini" style="height: 40px; margin: 6px 8px"
+            <md-button aria-label="NEW-GOAL" class="md-fab md-accent md-mini" style="z-index: -20;"
                        ng-click="onClick()">
-                <md-tooltip md-visible="showTooltip" md-direction="left">{{::button.tooltip }}</md-tooltip>
-                <md-icon md-svg-icon="{{button.icon }}"></md-icon>
+                <md-tooltip md-visible="showTooltip" md-direction="left">{{ button.tooltip }}</md-tooltip>
+                <md-icon md-svg-icon="{{button.icon}}"></md-icon>
             </md-button>
         </div>
     </md-fab-actions>

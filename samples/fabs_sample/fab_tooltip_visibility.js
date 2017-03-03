@@ -33,8 +33,12 @@
 
             $scope.onClick = function () {
                 $scope.showTooltip = false;    
-                
             }
+
+            $scope.demo = {};
+            $scope.demo.selectedDirection = 'left';
+            $scope.demo.selectedMode = 'md-fling';
+            $scope.demo.isOpen = false;
         }
     );
 

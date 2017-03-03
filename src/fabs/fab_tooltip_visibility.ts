@@ -1,22 +1,4 @@
 /// <reference path="../../typings/tsd.d.ts" />
-/*
-(function(){
-    'use strict';
-
-    var thisModule = angular.module("pipFabTooltipVisibility", []);
-
-    thisModule.directive("pipFabTooltipVisibility", function ($parse, $timeout) {
-        return {
-            restrict: 'A',
-            scope: false,
-            controller: function($scope, $attrs) {
-               
-            }
-        };
-    });
-
-})();*/
-
 
 class FabTooltipVisibilityController {
     private _element;
@@ -24,7 +6,6 @@ class FabTooltipVisibilityController {
     private _timeout: ng.ITimeoutService;
 
     constructor(
-        $mdMedia: angular.material.IMedia,
         $element: any,
         $attrs: angular.IAttributes,
         $scope: angular.IScope,
@@ -32,19 +13,21 @@ class FabTooltipVisibilityController {
         $parse
     ) {
         "ngInject";
-          let trigGetter = $parse($attrs['pipFabTooltipVisibility']),
-              showGetter = $parse($attrs['pipFabShowTooltip']),
-              showSetter = showGetter.assign;
+        let trigGetter = $parse($attrs['pipFabTooltipVisibility']),
+            showGetter = $parse($attrs['pipFabShowTooltip']),
+            showSetter = showGetter.assign;
 
-                $scope.$watch(trigGetter, (isOpen) => {
-                    if (isOpen) {
-                        $timeout(() => {
-                            showSetter($scope, isOpen);
-                        }, 600);
-                    } else {
-                        showSetter($scope, isOpen);
-                    }
-                });
+        $scope.$watch(trigGetter, (isOpen) => {
+            if (!_.isFunction(showSetter)) return;
+
+            if (isOpen) {
+                $timeout(() => {
+                    showSetter($scope, isOpen);
+                }, 600);
+            } else {
+                showSetter($scope, isOpen);
+            }
+        });
     }
 }
 
