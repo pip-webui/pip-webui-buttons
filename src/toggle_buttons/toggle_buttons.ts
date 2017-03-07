@@ -1,213 +1,147 @@
 // /// <reference path="../../typings/tsd.d.ts" />
 
-// class ToggleButtonsController {
-//     private _element;
-//     private _scope: angular.IScope;
-//     private _timeout: ng.ITimeoutService;
+class ToggleButton {
+    id: any;
+    name: string;
+    disabled: boolean;
+    level: number;
+    diselectable: boolean;
+    filled: boolean;
+}
 
-//     public $mdMedia: angular.material.IMedia;
-//     public class: string;
-//     public multiselect: boolean;
-//     public buttons;
-//     public currentButtonValue;
-//     public currentButtonIndex: number;
-//     public currentButton;
-//     public buttonSelected;
-//     public disabled;
-//     public enterSpacePress: Function;
-//     public ngDisabled: Function;
-//     public highlightButton;
-//     public change: Function;
-//     public onlyToggle: boolean;
+interface IToggleButtonsBindings {
+    [key: string]: any;
+
+    ngDisabled: any,
+    buttons: any,
+    currentButtonValue: any,
+    currentButton: any,
+    multiselect: any,
+    change: any,
+    onlyToggle: any
+}
+
+const ToggleButtonsBindings: IToggleButtonsBindings = {
+    ngDisabled: '<?',
+    buttons: '<pipButtons',
+    currentButtonValue: '=ngModel',
+    currentButton: '=?pipButtonObject',
+    multiselect: '<?pipMultiselect',
+    change: '&ngChange',
+    onlyToggle: '<?pipOnlyToggle'
+}
+
+class ToggleButtonsChanges implements ng.IOnChangesObject, IToggleButtonsBindings {
+    [key: string]: ng.IChangesObject<any>;
     
-//     constructor(
-//         $mdMedia: angular.material.IMedia,
-//         $element: any,
-//         $attrs: angular.IAttributes,
-//         $scope: angular.IScope,
-//         $timeout: ng.ITimeoutService
-//     ) {
-//         "ngInject";
-//          this.$mdMedia = $mdMedia;
-//          this.class = $attrs['class'] || '';
-//          this.multiselect = $scope['multiselect'] || false;
-//          this.ngDisabled = $scope['ngDisabled'];
-//          this.currentButtonValue = $scope['currentButtonValue'];
-//          this.currentButton = $scope['currentButton'];
-//          this.change = $scope['change'];
-//          this.onlyToggle = $scope['onlyToggle'];
+    currentButtonValue: any;
+    currentButton: any;
+    change: ng.IChangesObject<() => ng.IPromise<void>>;
 
-//          this.buttons = !$scope['buttons'] || _.isArray($scope['buttons']) && $scope['buttons'].length === 0 ? 
-//                         [] : $scope['buttons'];
-         
-//         let index = _.indexOf(this.buttons, _.find(this.buttons, {id: this.currentButtonValue}));
-//         this.currentButtonIndex = index < 0 ? 0 : index;
-//         this.currentButton = this.buttons.length > 0 ? this.buttons[this.currentButtonIndex] : this.currentButton;
-       
-//         this.buttonSelected = (index) => {
-//             if (this.disabled()) { return; }
-//             this.currentButtonIndex = index;
-//             this.currentButton = this.buttons[this.currentButtonIndex];
-//             this.currentButtonValue = this.currentButton.id || index;
+    ngDisabled: ng.IChangesObject<boolean>;
+    buttons: ng.IChangesObject<ToggleButton[]>;
+    multiselect: ng.IChangesObject<boolean>;
+    onlyToggle: ng.IChangesObject<boolean>;
+}
 
-//             $timeout( () => {
-//                 if (this.change) {
-//                     this.change();
-//                 } });
-//         };
+class ToggleButtonsController implements IToggleButtonsBindings {
 
-//         this.enterSpacePress = (event) => {
-//              this.buttonSelected(event.index);
-//         };
+    public ngDisabled: boolean;
+    public class: string;
+    public multiselect: boolean;
+    public buttons: ToggleButton[];
+    public disabled: boolean;
+    public currentButtonValue: any;
+    public currentButtonIndex: number;
+    public currentButton: any;
+    public change: () => ng.IPromise<any>;
+    public onlyToggle: boolean;
 
-//         this.disabled = () => {
-//             if (this.ngDisabled) { 
-//                 return this.ngDisabled(); 
-//             }
-//         };
+    constructor(
+        private $element: any,
+        private $attrs: angular.IAttributes,
+        private $scope: angular.IScope,
+        private $timeout: ng.ITimeoutService
+    ) {
+        "ngInject";
 
-//         this.highlightButton = (index) => {
-//             if (this.multiselect && 
-//                 !_.isUndefined(this.currentButton.level) && 
-//                 !_.isUndefined(this.buttons[index].level)) {
+        this.class = $attrs['class'] || '';
+        let index = _.indexOf(this.buttons, _.find(this.buttons, {
+            id: this.currentButtonValue
+        }));
+        this.currentButtonIndex = index < 0 ? 0 : index;
+        this.currentButton = this.buttons.length > 0 ? this.buttons[this.currentButtonIndex] : this.currentButton;
+    }
 
-//                 return this.currentButton.level >= this.buttons[index].level;
-//             } 
+    public $onChanges(changes: ToggleButtonsChanges) {
+        this.multiselect = changes.multiselect ? changes.multiselect.currentValue : false;
+        this.disabled = changes.ngDisabled ? changes.ngDisabled.currentValue : false;
+        this.onlyToggle = changes.onlyToggle ? changes.onlyToggle.currentValue : false;
 
-//             return this.currentButtonIndex == index;
-//         }
-//     }
+        this.buttons = !changes.buttons || _.isArray(changes.buttons.currentValue) && changes.buttons.currentValue.length === 0 ? 
+            [] : changes.buttons.currentValue;
 
+        let index = _.indexOf(this.buttons, _.find(this.buttons, {
+            id: this.currentButtonValue
+        }));
+        this.currentButtonIndex = index < 0 ? 0 : index;
+        this.currentButton = this.buttons.length > 0 ? this.buttons[this.currentButtonIndex] : this.currentButton;
+    }
 
-// }
+    public $postLink() {
+        this.$element
+            .on('focusin', () => {
+                this.$element.addClass('focused-container');
+            })
+            .on('focusout', () => {
+                this.$element.removeClass('focused-container');
+            });
+    }
 
-// (() => {
-//     function ToggleButtonsDirective() {
-//         return {
-//             restrict: 'EA',
-//             controller: ToggleButtonsController,
-//             controllerAs: 'toggle',
-//             scope: {
-//                 ngDisabled: '&',
-//                 buttons: '=pipButtons',
-//                 currentButtonValue: '=ngModel',
-//                 currentButton: '=?pipButtonObject',
-//                 multiselect: '=?pipMultiselect',
-//                 change: '&ngChange',
-//                 onlyToggle: '=?pipOnlyToggle'
-//             },
-//             link: function (scope, elem) {
-//                 elem
-//                     .on('focusin', function () {
-//                         elem.addClass('focused-container');
-//                     })
-//                     .on('focusout', function () {
-//                         elem.removeClass('focused-container');
-//                     });
-//             },
-//             templateUrl: 'toggle_buttons/toggle_buttons.html'
-//         };
-//     }
+    public buttonSelected(index) {
+        if (this.disabled) {
+            return;
+        }
 
-//     angular
-//         .module('pipToggleButtons', ['pipButtons.Templates'])
-//         .directive('pipToggleButtons', ToggleButtonsDirective);
+        this.currentButtonIndex = index;
+        this.currentButton = this.buttons[this.currentButtonIndex];
+        this.currentButtonValue = this.currentButton.id || index;
 
-// })();
+        this.$timeout(() => {
+            if (this.change) {
+                this.change();
+            }
+        });
+    }
 
+    public enterSpacePress(event) {
+        this.buttonSelected(event.index);
+    }
+
+    public highlightButton(index) {
+        if (this.multiselect &&
+            !_.isUndefined(this.currentButton.level) &&
+            !_.isUndefined(this.buttons[index].level)) {
+
+            return this.currentButton.level >= this.buttons[index].level;
+        }
+
+        return this.currentButtonIndex == index;
+    }
+}
 
 (function () {
     'use strict';
 
-    var thisModule = angular.module('pipToggleButtons', ['pipButtons.Templates']);
+    const ToggleButtons = {
+        bindings: ToggleButtonsBindings,
+        templateUrl: 'toggle_buttons/toggle_buttons.html',
+        controller: ToggleButtonsController,
+        controllerAs: 'toggle'
+    }
 
-    thisModule.directive('pipToggleButtons',
-        function () {
-            return {
-                restrict: 'EA',
-                scope: {
-                    ngDisabled: '&',
-                    buttons: '=pipButtons',
-                    currentButtonValue: '=ngModel',
-                    currentButton: '=?pipButtonObject',
-                    multiselect: '=?pipMultiselect',
-                    change: '&ngChange',
-                    onlyToggle: '=?pipOnlyToggle'
-                },
-                templateUrl: 'toggle_buttons/toggle_buttons.html',
-                controller: 
-                function ($scope, $element, $attrs, $mdMedia, $timeout) {
-                    var index;
-
-                    $scope.$mdMedia = $mdMedia;
-                    $scope.class = $attrs.class || '';
-                    $scope.multiselect = $scope.multiselect || false;
-
-                    if (!$scope.buttons || _.isArray($scope.buttons) && $scope.buttons.length === 0) {
-                        $scope.buttons = [];
-                    }
-
-                    index = _.indexOf($scope.buttons, _.find($scope.buttons, {id: $scope.currentButtonValue}));
-                    $scope.currentButtonIndex = index < 0 ? 0 : index;
-                    $scope.currentButton = $scope.buttons.length > 0 ? $scope.buttons[$scope.currentButtonIndex]
-                        : $scope.currentButton;
-
-                    $scope.buttonSelected = function (index) {
-                        if ($scope.disabled()) {
-                            return;
-                        }
-                        
-                        if ($scope.buttons[index].diselectable === true && index === $scope.currentButtonIndex 
-                                && $scope.buttons[index].level !== undefined) 
-                        {
-                            let curLevel = $scope.buttons[index].level, tmp;
-                            curLevel--;
-
-                            tmp = _.findIndex($scope.buttons, (b) => { return b['level'] === curLevel; });
-                            index = tmp > -1 ? tmp: index;
-                        }
-
-                        $scope.currentButtonIndex = index;
-                        $scope.currentButton = $scope.buttons[$scope.currentButtonIndex];
-                        $scope.currentButtonValue = $scope.currentButton.id === undefined ? index: $scope.currentButton.id;
-
-                        $timeout(function () {
-                            if ($scope.change) {
-                                $scope.change();
-                            }
-                        });
-                    };
-
-                    $scope.enterSpacePress = function (event) {
-                        $scope.buttonSelected(event.index);
-                    };
-
-                    $scope.disabled = function () {
-                        if ($scope.ngDisabled) {
-                            return $scope.ngDisabled();
-                        }
-                    };
-
-                    $scope.highlightButton = function (index) {
-                        if ($scope.multiselect && $scope.currentButton.level !== undefined && $scope.buttons[index].level !== undefined) {
-                           return $scope.currentButton.level >= $scope.buttons[index].level;
-                        } else {
-                            return $scope.currentButtonIndex == index;
-                        }
-                    }
-                },
-                link: function (scope, elem) {
-                    elem
-                        .on('focusin', function () {
-                            elem.addClass('focused-container');
-                        })
-                        .on('focusout', function () {
-                            elem.removeClass('focused-container');
-                        });
-                }
-            };
-        }
-    );
-
-})(); 
-
+    angular
+        .module('pipToggleButtons', ['pipButtons.Templates'])
+        .component('pipToggleButtons', ToggleButtons);
+    
+})();

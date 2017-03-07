@@ -40,13 +40,13 @@
             $scope.showRefresh = true;
             $scope.refreshText = '123 New Posts';
 
-            $scope.onRefresh = function () {
+            $scope.onRefresh = function ($event) {
                 $scope.showRefresh = false;
-                console.log('Refresh clicked!!!');
+                console.log('Refresh clicked, $event: ', $event);
             };
 
             $scope.onRefreshShow = function () {
-                $scope.refreshText = '' + _.random(0, 100) + ' New Posts';
+                $scope.refreshText = '' + _.random(10, 100) + ' New Posts';
                 $scope.showRefresh = true;
             };
         }

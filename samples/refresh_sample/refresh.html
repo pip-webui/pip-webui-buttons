@@ -6,7 +6,7 @@
     {{sample}}
 </p>
 
-<pip-refresh-button pip-text="refreshText" pip-visible="showRefresh" pip-refresh="onRefresh()">
+<pip-refresh-button pip-text="refreshText" pip-visible="showRefresh" pip-refresh="onRefresh($event)">
 </pip-refresh-button>
 
 <md-button class="lm0 md-raised md-accent flat" ng-click="onRefreshShow($event)">{{::refresh}}</md-button>

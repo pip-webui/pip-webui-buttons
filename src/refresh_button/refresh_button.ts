@@ -1,64 +1,98 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
+interface IRefreshButtonBindings {
+    [key: string]: any;
+
+    text: any,
+    visible: any,
+    onRefresh: any
+}
+
+const RefreshButtonBindings: IRefreshButtonBindings = {
+    text: '<pipText',
+    visible: '<pipVisible',
+    onRefresh: '&?pipRefresh'
+}
+
+class RefreshButtonChanges implements ng.IOnChangesObject, IRefreshButtonBindings {
+    [key: string]: ng.IChangesObject<any>;
+    // Not one way bindings
+    onRefresh: ng.IChangesObject<({$event: any}) => ng.IPromise<any>>;
+    // One way bindings
+    text: ng.IChangesObject<string>;
+    visible: ng.IChangesObject<boolean>;
+}
+
+class RefreshButtonController implements IRefreshButtonBindings {
+
+    private _textElement: any;
+    private _buttonElement: any;
+    private _width: number;
+
+    public text: string;
+    public visible: boolean;
+    public onRefresh: (param: {$event: any}) => ng.IPromise<any>;
+
+    constructor(
+        private $scope: ng.IScope,
+        private $element: any,
+        private $attrs: ng.IAttributes
+    ) { }
+
+    public $postLink() {
+        this._buttonElement = this.$element.children('.md-button');
+        this._textElement = this._buttonElement.children('.pip-refresh-text');
+        
+        this.show();
+    }
+
+    public $onChanges(changes: RefreshButtonChanges) {
+        if (changes.visible.currentValue === true) {
+            this.text = changes.text.currentValue;
+            this.show();
+        } else {
+            this.hide();
+        }
+    }
+
+    public onClick($event) {
+        if (this.onRefresh) {
+            this.onRefresh({$event: $event});
+        }
+    }
+
+    private show() {
+        if (this._textElement === undefined || this._buttonElement === undefined) {
+            return;
+        }
+        // Set new text
+        this._textElement.text(this.text);
+        // Show button
+        this._buttonElement.show();
+        // Adjust position
+        const width = this._buttonElement.width();
+        this._buttonElement.css('margin-left', '-' + width / 2 + 'px');
+    }
+
+    private hide() {
+        this._buttonElement.hide();
+    }
+}
+
+
 (function () {
     'use strict';
 
-    var thisModule = angular.module('pipRefreshButton', ['ngMaterial']);
+    const RefreshButtonComponent = {
+        bindings: RefreshButtonBindings,
+        controller: RefreshButtonController,
+        template: '<md-button class="pip-refresh-button" tabindex="-1" ng-click="$ctrl.onClick($event)" aria-label="REFRESH">' +
+            '<md-icon md-svg-icon="icons:refresh"></md-icon>' +
+            '<span class="pip-refresh-text"></span>' +
+            '</md-button>'
+    };
 
-    thisModule.directive('pipRefreshButton',
-        function ($parse) {
-            return {
-                restrict: 'EA',
-                scope: false,
-                template: String() +
-                '<md-button class="pip-refresh-button" tabindex="-1" ng-click="onClick($event)" aria-label="REFRESH">' +
-                '<md-icon md-svg-icon="icons:refresh"></md-icon>' +
-                '<span class="pip-refresh-text"></span>' +
-                '</md-button>',
-                replace: false,
-                link: function ($scope, $element, $attrs: any) {
-                    var width, text, show,
-                        textGetter = $parse($attrs.pipText),
-                        visibleGetter = $parse($attrs.pipVisible),
-                        refreshGetter = $parse($attrs.pipRefresh),
-                        $button = $element.children('.md-button'),
-                        $text = $button.children('.pip-refresh-text');
-
-                    show = function () {
-                        // Set a new text
-                        text = textGetter($scope);
-                        $text.text(text);
-
-                        // Show button
-                        $button.show();
-
-                        // Adjust position
-                        width = $button.width();
-                        $button.css('margin-left', '-' + width / 2 + 'px');
-                    };
-
-                    function hide() {
-                        $button.hide();
-                    }
-
-                    (<any>$scope).onClick = function () {
-                        refreshGetter($scope);
-                    };
-
-                    $scope.$watch(visibleGetter, function (newValue) {
-                        if (newValue) {
-                            show();
-                        } else {
-                            hide();
-                        }
-                    });
-
-                    $scope.$watch(textGetter, function (newValue: string) {
-                        $text.text(newValue);
-                    });
-                }
-            };
-        }
-    );
+    angular.module('pipRefreshButton', ['ngMaterial'])
+        .component('pipRefreshButton', RefreshButtonComponent);
 
 })();
