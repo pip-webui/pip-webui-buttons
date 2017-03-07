@@ -8,7 +8,7 @@
             'ngMaterial', 'wu.masonry', 'LocalStorageModule', 'ngAnimate',
 
             'pipServices',
-            'pipTheme.Default', 'pipTheme', 
+            'pipTheme.Default', 'pipTheme', 'pipLayout',
 
             'pipButtons',
             'appButtons.Refresh', 'appButtons.ToggleButtons', 'appComponentsStyles.ActionList',

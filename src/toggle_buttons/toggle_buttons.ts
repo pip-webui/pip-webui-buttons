@@ -56,15 +56,18 @@ class ToggleButtonsController implements IToggleButtonsBindings {
     public currentButton: any;
     public change: () => ng.IPromise<any>;
     public onlyToggle: boolean;
+    public pipMedia: any;
 
     constructor(
         private $element: any,
         private $attrs: angular.IAttributes,
         private $scope: angular.IScope,
-        private $timeout: ng.ITimeoutService
+        private $timeout: ng.ITimeoutService,
+        $injector: ng.auto.IInjectorService
     ) {
         "ngInject";
 
+        this.pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
         this.class = $attrs['class'] || '';
         let index = _.indexOf(this.buttons, _.find(this.buttons, {
             id: this.currentButtonValue

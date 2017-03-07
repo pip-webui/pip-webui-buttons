@@ -1,7 +1,7 @@
 <div class="pip-toggle-buttons layout-row {{toggle.class}}" 
      pip-selected="toggle.bufButtonIndex" 
      pip-enter-space-press="toggle.enterSpacePress($event)"
-     ng-if="!toggle.$mdMedia('xs') || toggle.onlyToggle">
+     ng-if="!toggle.pipMedia('xs') || toggle.onlyToggle">
     <md-button tabindex="-1" ng-repeat="button in toggle.buttons"
                ng-class="{'md-accent md-raised selected color-accent-bg' : toggle.highlightButton($index)}"
                ng-attr-style="{{ 'background-color:' + (toggle.highlightButton($index) ? button.backgroundColor : '') + '!important' }}"
@@ -12,7 +12,7 @@
     </md-button>
 </div>
 
-<md-input-container class="md-block" ng-if="toggle.$mdMedia('xs') && !toggle.onlyToggle">
+<md-input-container class="md-block" ng-if="toggle.pipMedia('xs') && !toggle.onlyToggle">
     <md-select ng-model="toggle.currentButtonIndex" ng-disabled="toggle.ngDisabled" aria-label="DROPDOWN" 
               md-on-close="toggle.buttonSelected(toggle.currentButtonIndex)">
         <md-option ng-repeat="action in toggle.buttons" value="{{ ::$index }}">
