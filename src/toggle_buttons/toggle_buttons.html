@@ -6,14 +6,14 @@
                ng-class="{'md-accent md-raised selected color-accent-bg' : toggle.highlightButton($index)}"
                ng-attr-style="{{ 'background-color:' + (toggle.highlightButton($index) ? button.backgroundColor : '') + '!important' }}"
                class="pip-selectable pip-chip-button flex" ng-click="toggle.buttonSelected($index, $event)"
-               ng-disabled="button.disabled || toggle.ngDisabled">
+               ng-disabled="button.disabled || toggle.disabled">
         {{button.name || button.title | translate}}
         <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span>
     </md-button>
 </div>
 
 <md-input-container class="md-block" ng-if="toggle.pipMedia('xs') && !toggle.onlyToggle">
-    <md-select ng-model="toggle.currentButtonIndex" ng-disabled="toggle.ngDisabled" aria-label="DROPDOWN" 
+    <md-select ng-model="toggle.currentButtonIndex" ng-disabled="toggle.disabled" aria-label="DROPDOWN" 
               md-on-close="toggle.buttonSelected(toggle.currentButtonIndex)">
         <md-option ng-repeat="action in toggle.buttons" value="{{ ::$index }}">
             {{ (action.title || action.name) | translate }}
