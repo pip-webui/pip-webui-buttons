@@ -31,7 +31,7 @@ class RefreshButtonController implements IRefreshButtonBindings {
 
     public text: string;
     public visible: boolean;
-    public onRefresh: (param: {$event: any}) => ng.IPromise<any>;
+    public onRefresh: (param: {$event: ng.IAngularEvent}) => ng.IPromise<any>;
 
     constructor(
         private $scope: ng.IScope,
