@@ -145,7 +145,7 @@ class ToggleButtonsController implements IToggleButtonsBindings {
     }*/
 
     // Or this variant, which safer
-    class ToggleButtons implements ng.IComponentOptions {
+    /*class ToggleButtons implements ng.IComponentOptions {
         public bindings: IToggleButtonsBindings;
         public controller: ng.Injectable<ng.IControllerConstructor>;
         public templateUrl: string;
@@ -155,10 +155,18 @@ class ToggleButtonsController implements IToggleButtonsBindings {
             this.controller = ToggleButtonsController;
             this.templateUrl = 'toggle_buttons/toggle_buttons.html';
         }
+    }*/
+
+    // Or, I think, this variant. 
+    // This one is safe because we've specified interface and requires less memory allocation because we use constant.
+    const ToggleButtons: ng.IComponentOptions = {
+        bindings: ToggleButtonsBindings,
+        templateUrl: 'toggle_buttons/toggle_buttons.html',
+        controller: ToggleButtonsController,
     }
 
     angular
         .module('pipToggleButtons', ['pipButtons.Templates'])
-        .component('pipToggleButtons', new ToggleButtons());
+        .component('pipToggleButtons', ToggleButtons);
     
 })();
