@@ -3,15 +3,15 @@
 (function () {
     'use strict';
 
-    var thisModule = angular.module('pipButtons.Translate', []);
+    function ToggleButtonsFilter($injector: ng.auto.IInjectorService) {
+        const pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
-    thisModule.filter('translate', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') 
-            ? $injector.get('pipTranslate') : null;
-
-        return function (key) {
-            return pipTranslate  ? pipTranslate.translate(key) || key : key;
+        return function(key: string) {
+            return pipTranslate  ? pipTranslate['translate'](key) || key : key;
         }
-    });
+    }
+
+    angular.module('pipButtons.Translate', [])
+        .filter('translate', ToggleButtonsFilter);
 
 })();

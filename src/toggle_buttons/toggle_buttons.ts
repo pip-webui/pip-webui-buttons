@@ -162,7 +162,7 @@ class ToggleButtonsController implements IToggleButtonsBindings {
     const ToggleButtons: ng.IComponentOptions = {
         bindings: ToggleButtonsBindings,
         templateUrl: 'toggle_buttons/toggle_buttons.html',
-        controller: ToggleButtonsController,
+        controller: ToggleButtonsController
     }
 
     angular
