@@ -33,11 +33,11 @@ const ToggleButtonsBindings: IToggleButtonsBindings = {
 
 class ToggleButtonsChanges implements ng.IOnChangesObject, IToggleButtonsBindings {
     [key: string]: ng.IChangesObject<any>;
-    
+    // Not one way bindings
     currentButtonValue: any;
     currentButton: any;
     change: ng.IChangesObject<() => ng.IPromise<void>>;
-
+    // One way bindings
     ngDisabled: ng.IChangesObject<boolean>;
     buttons: ng.IChangesObject<ToggleButton[]>;
     multiselect: ng.IChangesObject<boolean>;
@@ -45,6 +45,7 @@ class ToggleButtonsChanges implements ng.IOnChangesObject, IToggleButtonsBinding
 }
 
 class ToggleButtonsController implements IToggleButtonsBindings {
+    lenght: number;
 
     public ngDisabled: boolean;
     public class: string;
@@ -69,7 +70,7 @@ class ToggleButtonsController implements IToggleButtonsBindings {
 
         this.pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
         this.class = $attrs['class'] || '';
-        let index = _.indexOf(this.buttons, _.find(this.buttons, {
+        const index = _.indexOf(this.buttons, _.find(this.buttons, {
             id: this.currentButtonValue
         }));
         this.currentButtonIndex = index < 0 ? 0 : index;
@@ -84,7 +85,7 @@ class ToggleButtonsController implements IToggleButtonsBindings {
         this.buttons = !changes.buttons || _.isArray(changes.buttons.currentValue) && changes.buttons.currentValue.length === 0 ? 
             [] : changes.buttons.currentValue;
 
-        let index = _.indexOf(this.buttons, _.find(this.buttons, {
+        const index = _.indexOf(this.buttons, _.find(this.buttons, {
             id: this.currentButtonValue
         }));
         this.currentButtonIndex = index < 0 ? 0 : index;
@@ -136,15 +137,28 @@ class ToggleButtonsController implements IToggleButtonsBindings {
 (function () {
     'use strict';
 
-    const ToggleButtons = {
+    // We can use this variant, which requires less memory allocation
+    /*const ToggleButtons = {
         bindings: ToggleButtonsBindings,
         templateUrl: 'toggle_buttons/toggle_buttons.html',
         controller: ToggleButtonsController,
-        controllerAs: 'toggle'
+    }*/
+
+    // Or this variant, which safer
+    class ToggleButtons implements ng.IComponentOptions {
+        public bindings: IToggleButtonsBindings;
+        public controller: ng.Injectable<ng.IControllerConstructor>;
+        public templateUrl: string;
+
+        constructor() {
+            this.bindings = ToggleButtonsBindings;
+            this.controller = ToggleButtonsController;
+            this.templateUrl = 'toggle_buttons/toggle_buttons.html';
+        }
     }
 
     angular
         .module('pipToggleButtons', ['pipButtons.Templates'])
-        .component('pipToggleButtons', ToggleButtons);
+        .component('pipToggleButtons', new ToggleButtons());
     
 })();
