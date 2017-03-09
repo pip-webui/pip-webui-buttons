@@ -7,7 +7,6 @@
         'pipFabTooltipVisibility'
     ]);
 })();
-
 },{}],2:[function(require,module,exports){
 (function () {
     'use strict';
@@ -21,7 +20,6 @@
     angular.module('pipButtons.Translate', [])
         .filter('translate', ToggleButtonsFilter);
 })();
-
 },{}],3:[function(require,module,exports){
 var FabTooltipVisibilityController = (function () {
     FabTooltipVisibilityController.$inject = ['$element', '$attrs', '$scope', '$timeout', '$parse'];
@@ -56,7 +54,6 @@ var FabTooltipVisibilityController = (function () {
         .module('pipFabTooltipVisibility', [])
         .directive('pipFabTooltipVisibility', pipFabTooltipVisibility);
 })();
-
 },{}],4:[function(require,module,exports){
 var RefreshButtonBindings = {
     text: '<pipText',
@@ -120,7 +117,6 @@ var RefreshButtonController = (function () {
     angular.module('pipRefreshButton', ['ngMaterial'])
         .component('pipRefreshButton', RefreshButtonComponent);
 })();
-
 },{}],5:[function(require,module,exports){
 var ToggleButton = (function () {
     function ToggleButton() {
@@ -217,7 +213,6 @@ var ToggleButtonsController = (function () {
         .module('pipToggleButtons', ['pipButtons.Templates'])
         .component('pipToggleButtons', ToggleButtons);
 })();
-
 },{}],6:[function(require,module,exports){
 (function(module) {
 try {
