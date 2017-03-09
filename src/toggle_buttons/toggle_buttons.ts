@@ -15,13 +15,13 @@
     interface IToggleButtonsBindings {
         [key: string]: any;
 
-        ngDisabled: any,
-            buttons: any,
-            currentButtonValue: any,
-            currentButton: any,
-            multiselect: any,
-            change: any,
-            onlyToggle: any
+        ngDisabled: any;
+        buttons: any;
+        currentButtonValue: any;
+        currentButton: any;
+        multiselect: any;
+        change: any;
+        onlyToggle: any
     }
 
     const ToggleButtonsBindings: IToggleButtonsBindings = {
