@@ -6,9 +6,9 @@
     interface IRefreshButtonBindings {
         [key: string]: any;
 
-        text: any,
-            visible: any,
-            onRefresh: any
+        text: any;
+        visible: any;
+        onRefresh: any
     }
 
     const RefreshButtonBindings: IRefreshButtonBindings = {
