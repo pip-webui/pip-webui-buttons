@@ -1,8 +1,6 @@
 // /// <reference path="../../typings/tsd.d.ts" />
 
-(function () {
-    'use strict';
-
+{
     class ToggleButton {
         id: any;
         name: string;
@@ -145,5 +143,4 @@
     angular
         .module('pipToggleButtons', ['pipButtons.Templates'])
         .component('pipToggleButtons', ToggleButtons);
-
-})();
+}

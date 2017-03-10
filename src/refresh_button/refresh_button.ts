@@ -1,8 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-(function () {
-    'use strict';
-
+{
     interface IRefreshButtonBindings {
         [key: string]: any;
 
@@ -100,5 +98,4 @@
 
     angular.module('pipRefreshButton', ['ngMaterial'])
         .component('pipRefreshButton', RefreshButtonComponent);
-
-})();
+}

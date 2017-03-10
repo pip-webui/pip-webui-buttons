@@ -1,8 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-(function () {
-    'use strict';
-
+{
     class FabTooltipVisibilityController {
         private _element;
         private _scope: angular.IScope;
@@ -35,7 +33,7 @@
     }
 
 
-    function pipFabTooltipVisibility($parse, $timeout) {
+    function pipFabTooltipVisibility($parse, $timeout): ng.IDirective {
         return {
             restrict: 'A',
             scope: false,
@@ -46,5 +44,4 @@
     angular
         .module('pipFabTooltipVisibility', [])
         .directive('pipFabTooltipVisibility', pipFabTooltipVisibility);
-
-})();
+}
