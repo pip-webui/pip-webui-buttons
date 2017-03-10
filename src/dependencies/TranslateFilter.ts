@@ -1,7 +1,5 @@
-/// <reference path="../../typings/tsd.d.ts" />
-
 {
-    function ToggleButtonsFilter($injector: ng.auto.IInjectorService) {
+    function translate($injector: ng.auto.IInjectorService) {
         const pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
 
         return function (key: string) {
@@ -10,5 +8,5 @@
     }
 
     angular.module('pipButtons.Translate', [])
-        .filter('translate', ToggleButtonsFilter);
+        .filter('translate', translate);
 }

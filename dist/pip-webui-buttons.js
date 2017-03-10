@@ -1,24 +1,17 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}(g.pip || (g.pip = {})).buttons = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-angular.module('pipButtons', [
-    'pipToggleButtons',
-    'pipRefreshButton',
-    'pipFabTooltipVisibility'
-]);
-
-},{}],2:[function(require,module,exports){
 {
-    ToggleButtonsFilter.$inject = ['$injector'];
-    function ToggleButtonsFilter($injector) {
+    translate.$inject = ['$injector'];
+    function translate($injector) {
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         return function (key) {
             return pipTranslate ? pipTranslate['translate'](key) || key : key;
         };
     }
     angular.module('pipButtons.Translate', [])
-        .filter('translate', ToggleButtonsFilter);
+        .filter('translate', translate);
 }
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 {
     pipFabTooltipVisibility.$inject = ['$parse', '$timeout'];
     var FabTooltipVisibilityController_1 = (function () {
@@ -53,7 +46,19 @@ angular.module('pipButtons', [
         .directive('pipFabTooltipVisibility', pipFabTooltipVisibility);
 }
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./refresh_button/RefreshButton");
+require("./toggle_buttons/ToggleButtons");
+require("./fabs/FabTooltipVisibility");
+angular.module('pipButtons', [
+    'pipToggleButtons',
+    'pipRefreshButton',
+    'pipFabTooltipVisibility'
+]);
+
+},{"./fabs/FabTooltipVisibility":2,"./refresh_button/RefreshButton":4,"./toggle_buttons/ToggleButtons":5}],4:[function(require,module,exports){
 {
     var RefreshButtonBindings = {
         text: '<pipText',
@@ -114,7 +119,8 @@ angular.module('pipButtons', [
             '<span class="pip-refresh-text"></span>' +
             '</md-button>'
     };
-    angular.module('pipRefreshButton', ['ngMaterial'])
+    angular
+        .module('pipRefreshButton', ['ngMaterial'])
         .component('pipRefreshButton', RefreshButtonComponent);
 }
 
@@ -205,7 +211,7 @@ angular.module('pipButtons', [
     }());
     var ToggleButtons = {
         bindings: ToggleButtonsBindings,
-        templateUrl: 'toggle_buttons/toggle_buttons.html',
+        templateUrl: 'toggle_buttons/ToggleButtons.html',
         controller: ToggleButtonsController
     };
     angular
@@ -221,7 +227,7 @@ try {
   module = angular.module('pipButtons.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('toggle_buttons/toggle_buttons.html',
+  $templateCache.put('toggle_buttons/ToggleButtons.html',
     '<div class="pip-toggle-buttons layout-row {{$ctrl.class}}" pip-selected="$ctrl.bufButtonIndex" pip-enter-space-press="$ctrl.enterSpacePress($event)" ng-if="!$ctrl.pipMedia(\'xs\') || $ctrl.onlyToggle"><md-button tabindex="-1" ng-repeat="button in $ctrl.buttons" ng-class="{\'md-accent md-raised selected color-accent-bg\' : $ctrl.highlightButton($index)}" ng-attr-style="{{ \'background-color:\' + ($ctrl.highlightButton($index) ? button.backgroundColor : \'\') + \'!important\' }}" class="pip-selectable pip-chip-button flex" ng-click="$ctrl.buttonSelected($index, $event)" ng-disabled="button.disabled || $ctrl.disabled">{{button.name || button.title | translate}} <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span></md-button></div><md-input-container class="md-block" ng-if="$ctrl.pipMedia(\'xs\') && !$ctrl.onlyToggle"><md-select ng-model="$ctrl.currentButtonIndex" ng-disabled="$ctrl.disabled" aria-label="DROPDOWN" md-on-close="$ctrl.buttonSelected($ctrl.currentButtonIndex)"><md-option ng-repeat="action in $ctrl.buttons" value="{{ ::$index }}">{{ (action.title || action.name) | translate }} <span ng-if="action.checked || action.complete || action.filled" class="pip-tagged">*</span></md-option></md-select></md-input-container>');
 }]);
 })();
