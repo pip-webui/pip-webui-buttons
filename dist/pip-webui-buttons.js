@@ -10,7 +10,6 @@
     angular.module('pipButtons.Translate', [])
         .filter('translate', translate);
 }
-
 },{}],2:[function(require,module,exports){
 {
     pipFabTooltipVisibility.$inject = ['$parse', '$timeout'];
@@ -45,7 +44,6 @@
         .module('pipFabTooltipVisibility', [])
         .directive('pipFabTooltipVisibility', pipFabTooltipVisibility);
 }
-
 },{}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -57,7 +55,6 @@ angular.module('pipButtons', [
     'pipRefreshButton',
     'pipFabTooltipVisibility'
 ]);
-
 },{"./fabs/FabTooltipVisibility":2,"./refresh_button/RefreshButton":4,"./toggle_buttons/ToggleButtons":5}],4:[function(require,module,exports){
 {
     var RefreshButtonBindings = {
@@ -123,7 +120,6 @@ angular.module('pipButtons', [
         .module('pipRefreshButton', ['ngMaterial'])
         .component('pipRefreshButton', RefreshButtonComponent);
 }
-
 },{}],5:[function(require,module,exports){
 {
     var ToggleButton = (function () {
@@ -218,7 +214,6 @@ angular.module('pipButtons', [
         .module('pipToggleButtons', ['pipButtons.Templates'])
         .component('pipToggleButtons', ToggleButtons);
 }
-
 },{}],6:[function(require,module,exports){
 (function(module) {
 try {
@@ -228,7 +223,30 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('toggle_buttons/ToggleButtons.html',
-    '<div class="pip-toggle-buttons layout-row {{$ctrl.class}}" pip-selected="$ctrl.bufButtonIndex" pip-enter-space-press="$ctrl.enterSpacePress($event)" ng-if="!$ctrl.pipMedia(\'xs\') || $ctrl.onlyToggle"><md-button tabindex="-1" ng-repeat="button in $ctrl.buttons" ng-class="{\'md-accent md-raised selected color-accent-bg\' : $ctrl.highlightButton($index)}" ng-attr-style="{{ \'background-color:\' + ($ctrl.highlightButton($index) ? button.backgroundColor : \'\') + \'!important\' }}" class="pip-selectable pip-chip-button flex" ng-click="$ctrl.buttonSelected($index, $event)" ng-disabled="button.disabled || $ctrl.disabled">{{button.name || button.title | translate}} <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span></md-button></div><md-input-container class="md-block" ng-if="$ctrl.pipMedia(\'xs\') && !$ctrl.onlyToggle"><md-select ng-model="$ctrl.currentButtonIndex" ng-disabled="$ctrl.disabled" aria-label="DROPDOWN" md-on-close="$ctrl.buttonSelected($ctrl.currentButtonIndex)"><md-option ng-repeat="action in $ctrl.buttons" value="{{ ::$index }}">{{ (action.title || action.name) | translate }} <span ng-if="action.checked || action.complete || action.filled" class="pip-tagged">*</span></md-option></md-select></md-input-container>');
+    '<div class="pip-toggle-buttons layout-row {{$ctrl.class}}" \n' +
+    '     pip-selected="$ctrl.bufButtonIndex" \n' +
+    '     pip-enter-space-press="$ctrl.enterSpacePress($event)"\n' +
+    '     ng-if="!$ctrl.pipMedia(\'xs\') || $ctrl.onlyToggle">\n' +
+    '    <md-button tabindex="-1" ng-repeat="button in $ctrl.buttons"\n' +
+    '               ng-class="{\'md-accent md-raised selected color-accent-bg\' : $ctrl.highlightButton($index)}"\n' +
+    '               ng-attr-style="{{ \'background-color:\' + ($ctrl.highlightButton($index) ? button.backgroundColor : \'\') + \'!important\' }}"\n' +
+    '               class="pip-selectable pip-chip-button flex" ng-click="$ctrl.buttonSelected($index, $event)"\n' +
+    '               ng-disabled="button.disabled || $ctrl.disabled">\n' +
+    '        {{button.name || button.title | translate}}\n' +
+    '        <span ng-if="button.checked || button.complete || button.filled" class="pip-tagged">*</span>\n' +
+    '    </md-button>\n' +
+    '</div>\n' +
+    '\n' +
+    '<md-input-container class="md-block" ng-if="$ctrl.pipMedia(\'xs\') && !$ctrl.onlyToggle">\n' +
+    '    <md-select ng-model="$ctrl.currentButtonIndex" ng-disabled="$ctrl.disabled" aria-label="DROPDOWN" \n' +
+    '              md-on-close="$ctrl.buttonSelected($ctrl.currentButtonIndex)">\n' +
+    '        <md-option ng-repeat="action in $ctrl.buttons" value="{{ ::$index }}">\n' +
+    '            {{ (action.title || action.name) | translate }}\n' +
+    '            <span ng-if="action.checked || action.complete || action.filled" class="pip-tagged">*</span>\n' +
+    '        </md-option>\n' +
+    '    </md-select>\n' +
+    '</md-input-container>\n' +
+    '');
 }]);
 })();
 
