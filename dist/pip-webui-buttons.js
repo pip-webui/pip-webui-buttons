@@ -149,6 +149,7 @@ angular.module('pipButtons', [
             this.$attrs = $attrs;
             this.$scope = $scope;
             this.$timeout = $timeout;
+            this.buttons = [];
             this.pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
             this.class = $attrs['class'] || '';
             var index = _.indexOf(this.buttons, _.find(this.buttons, {
@@ -158,10 +159,12 @@ angular.module('pipButtons', [
             this.currentButton = this.buttons.length > 0 ? this.buttons[this.currentButtonIndex] : this.currentButton;
         }
         ToggleButtonsController.prototype.$onChanges = function (changes) {
-            this.multiselect = changes.multiselect ? changes.multiselect.currentValue : false;
-            this.disabled = changes.ngDisabled ? changes.ngDisabled.currentValue : false;
-            this.onlyToggle = changes.onlyToggle ? changes.onlyToggle.currentValue : false;
-            this.buttons = !changes.buttons || _.isArray(changes.buttons.currentValue) && changes.buttons.currentValue.length === 0 ? [] : changes.buttons.currentValue;
+            this.multiselect = changes.multiselect ? changes.multiselect.currentValue : this.multiselect;
+            this.disabled = changes.ngDisabled ? changes.ngDisabled.currentValue : this.disabled;
+            this.onlyToggle = changes.onlyToggle ? changes.onlyToggle.currentValue : this.onlyToggle;
+            if (changes.buttons) {
+                this.buttons = _.isArray(changes.buttons.currentValue) && changes.buttons.currentValue.length === 0 ? [] : changes.buttons.currentValue;
+            }
             var index = _.indexOf(this.buttons, _.find(this.buttons, {
                 id: this.currentButtonValue
             }));

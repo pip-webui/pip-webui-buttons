@@ -50,7 +50,7 @@ class ToggleButtonsController implements IToggleButtonsBindings {
     public ngDisabled: boolean;
     public class: string;
     public multiselect: boolean;
-    public buttons: ToggleButton[];
+    public buttons: ToggleButton[] = [];
     public disabled: boolean;
     public currentButtonValue: any;
     public currentButtonIndex: number;
@@ -78,11 +78,13 @@ class ToggleButtonsController implements IToggleButtonsBindings {
     }
 
     public $onChanges(changes: ToggleButtonsChanges) {
-        this.multiselect = changes.multiselect ? changes.multiselect.currentValue : false;
-        this.disabled = changes.ngDisabled ? changes.ngDisabled.currentValue : false;
-        this.onlyToggle = changes.onlyToggle ? changes.onlyToggle.currentValue : false;
+        this.multiselect = changes.multiselect ? changes.multiselect.currentValue : this.multiselect;
+        this.disabled = changes.ngDisabled ? changes.ngDisabled.currentValue : this.disabled;
+        this.onlyToggle = changes.onlyToggle ? changes.onlyToggle.currentValue : this.onlyToggle;
 
-        this.buttons = !changes.buttons || _.isArray(changes.buttons.currentValue) && changes.buttons.currentValue.length === 0 ? [] : changes.buttons.currentValue;
+        if (changes.buttons) {
+            this.buttons = _.isArray(changes.buttons.currentValue) && changes.buttons.currentValue.length === 0 ? [] : changes.buttons.currentValue;
+        }
 
         const index = _.indexOf(this.buttons, _.find(this.buttons, {
             id: this.currentButtonValue
