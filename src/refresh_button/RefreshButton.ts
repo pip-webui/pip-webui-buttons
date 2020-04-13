@@ -41,7 +41,7 @@
             private $scope: ng.IScope,
             private $element: any,
             private $attrs: ng.IAttributes
-        ) { }
+        ) { "ngInject"; }
 
         public $postLink() {
             this._buttonElement = this.$element.children('.md-button');
